@@ -1,0 +1,86 @@
+@import '../main.sass'
+
+.principal
+
+    //Buscador principal de la páginaweb
+    &__buscador
+        height: 100%
+        width: 33%
+        max-height: $M
+        max-width: 550px
+        min-height: 32px
+        min-width: 250px
+        display: flex
+        align-self: center
+
+        &__input
+            height: 100%
+            width: 100%
+            font-size: $XS
+            border: 1px solid $color_oscuro_primario
+            border-right: none
+            border-radius: $XS 0 0 $XS
+            padding-left: $XS
+            padding-right: $XS
+            outline: none
+
+        &__boton
+            height: 100%
+            width: 8%
+            max-width: $L
+            min-width: $M
+            display: flex
+            align-items: center
+            justify-content: center            
+            background-color: $color_oscuro_primario
+            border: 1px solid $color_oscuro_primario
+            border-radius: 0 $XS $XS 0
+            
+            &__icono
+                color: $color_claro_primario
+                font-size: 100%
+
+            &:hover
+                background-color:  $color_primario
+
+.encabezado__explorador
+
+    &__buscador
+        height: 60%
+        width: 40%
+        min-width: 280px
+        max-width: 650px
+        padding: 0 $XS
+        display: flex
+        justify-content: space-between
+        align-items: center
+
+        &__input
+            height: 100%
+            width: 100%
+            font-size: $XS
+            color: $color_claro_primario
+            background-color: $color_oscuro_secundario
+            border: none
+            border-radius: $XS 0 0 $XS
+            padding-left: $XS
+            padding-right: $XS
+            outline: none
+
+        &__boton
+            height: 100%
+            width: 8%
+            max-width: $L
+            min-width: $M
+            display: flex
+            align-items: center
+            justify-content: center     
+            background-color: $color_oscuro_secundario
+            border-radius: 0 $XS $XS 0
+
+            &__icono
+                color: $color_claro_primario
+                font-size: 100%
+
+                &:hover
+                    color: $color_primario

@@ -1,0 +1,184 @@
+@import '../main.sass'
+
+//Contiene el diseño de la página 404
+.principal    
+    @extend %principal
+
+    //Modificación única del principal perteneciente a la página de error 404
+    &--404
+        flex-direction: row
+        gap: $XS
+        padding: $XXL
+        justify-content: center
+        align-items: center
+        background: radial-gradient($color_oscuro_secundario 40% , $color_oscuro_primario 60%)
+        animation: pulsacion 3s infinite
+        animation-direction: alternate
+
+        //Cambios de la fuente en el cambio de resolución
+        @media (max-width: 1255px)  
+          .principal__informacion__pagina
+              font-size: $S
+
+        //Cambios en la estructura y tamaños de fuente para el nuevo cambio de resolución
+        @media (max-width: 900px)  
+            flex-direction: column
+            padding: 0
+
+            .principal__img
+                display: none
+
+            .principal__informacion__error
+                font-size: 142px
+
+            .principal__informacion__pagina
+                font-size: $M
+
+        //Cambios de la fuente en el cambio de resolución
+        @media (max-width: 400px)  
+          .principal__informacion__pagina
+              font-size: $S
+
+    //Información del error 404
+    &__informacion
+        display: flex
+        flex-direction: column
+        justify-content: center
+        align-items: center
+              
+        &__activo
+          opacity: 60%
+          
+        //Texto 404 con una animación de 3segundos infinita
+        &__error
+            font-family: $fuente_primaria
+            color: $color_claro_primario
+            font-size: 186px
+            animation: glitch 3s linear infinite
+
+            //Inserta contenido antes de otro 404 para dar el efecto de glitch aplicando la animación de glitchTop
+            &:before
+              content: "404"
+              position: absolute
+              left: 0
+              animation: glitchTop 3s linear infinite
+              clip-path: polygon(0 0, 100% 0, 100% 33%, 0 33%)
+
+            //Inserta contenido despues de otro 404 para dar el efecto de glitch aplicando la animación de glitchBottom
+            &:after
+              content: "404"
+              position: absolute
+              left: 0
+              animation: glitchBotom 3.5s linear infinite
+              clip-path: polygon(0 67%, 100% 67%, 100% 100%, 0 100%)
+
+        //Información de página no encontrada de la página de error 404
+        &__pagina
+            font-family: $fuente_primaria
+            color: $color_claro_primario
+            font-size: $XXL
+            animation: glitch 5s linear infinite
+            text-align: center
+
+            //Inserta contenido antes de otro "página no encontrada" para dar el efecto de glitch aplicando la animación de glitchTop
+            &:before
+              content: "PÁGINA NO ENCONTRADA"
+              position: absolute
+              left: 0
+              animation: glitchTop 5s linear infinite
+              clip-path: polygon(0 0, 100% 0, 100% 33%, 0 33%)
+            //Inserta contenido despues de otro "página no encontrada" para dar el efecto de glitch aplicando la animación de glitchBottom
+            &:after
+              content: "PÁGINA NO ENCONTRADA"
+              position: absolute
+              left: 0
+              animation: glitchBotom 4.5s linear infinite
+              clip-path: polygon(0 67%, 100% 67%, 100% 100%, 0 100%)
+
+    //Imagen que acompaña al texto de error 404
+    &__img
+      width: auto
+      z-index: 2
+
+      &__hover
+        transform: scale(1.1)
+    
+    //Nubes que tendrá una animación de desplazamiento lateral para dar un efecto de niebla
+    &__nube
+        width:10000px
+        height: 100vh
+        background: transparent url(../../img/nubes.png) repeat
+        background-size: 1000px 1000px
+        position: absolute
+        top: 0
+        right: 0        
+        z-index: 0
+        animation: moverBackground 25s linear infinite
+        opacity: 30%
+
+//Animación que va alterando el circulo con colores gradiantes para que se vea como una pulsación de fondo
+@keyframes pulsacion
+    0% 
+        background: radial-gradient($color_oscuro_secundario 30%, $color_oscuro_primario 60%)
+
+    20% 
+        background: radial-gradient($color_oscuro_secundario 30%, $color_oscuro_primario 59%)
+    
+    40% 
+        background: radial-gradient($color_oscuro_secundario 30%, $color_oscuro_primario 58%)
+
+    60% 
+        background: radial-gradient($color_oscuro_secundario 30%, $color_oscuro_primario 57%)
+
+    80% 
+        background: radial-gradient($color_oscuro_secundario 30%, $color_oscuro_primario 56%)
+
+    100% 
+        background: radial-gradient($color_oscuro_secundario 30%, $color_oscuro_primario 55%)
+
+//Mueve las nubes de izquierda a derecha
+@keyframes moverBackground
+  from 
+    transform: translate3d(0px, 0px, 0px)
+  
+  to 
+    transform: translate3d(1000px, 0px, 0px)
+
+//Efecto de glitch para la fuente. Translada y deforma la fuente en diferentes tiempos de la animación
+@keyframes glitch
+  2%,64%
+    transform: translate(2px,0) skew(0deg)
+  
+  4%,60%
+    transform: translate(-2px,0) skew(0deg)
+  
+  62%
+    transform: translate(0,0) skew(5deg) 
+
+//Efecto de glitch para la fuente de la parte superior. Translada y deforma la fuente en diferentes tiempos de la animación
+@keyframes glitchTop
+  2%,64%
+    transform: translate(2px,-2px)
+  
+  4%,60%
+    transform: translate(-2px,2px)
+
+  62%
+    transform: translate(13px,-1px) skew(-13deg)
+
+//Efecto de glitch para la fuente de la parte inferior. Translada y deforma la fuente en diferentes tiempos de la animación
+@keyframes glitchBotom
+  2%,64%
+    transform: translate(-2px,0)
+  
+  4%,60%
+    transform: translate(-2px,0)
+  
+  62%
+    transform: translate(-22px,5px) skew(21deg)
+  
+
+  
+
+  
+

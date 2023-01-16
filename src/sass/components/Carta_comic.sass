@@ -1,0 +1,128 @@
+@import '../main.sass'
+//Carta que tiene el diseño de las series y comics
+.principal__carta
+    width: 85%
+    max-width: 1420px
+    display: grid
+    align-self: center
+    grid-template-columns: repeat(3,1fr)
+    gap: $XL
+    margin-bottom: $XL
+    
+    //Propiedades que tendra cada carta. Con un fondo oculto que descendera con un transitión con el hover
+    &__item
+        height: 100%
+        width: 100%            
+        max-height: 325px
+        max-width: 600px 
+        min-height: 200px
+        display: flex
+        flex-direction: row
+        position: relative
+        background-color: $color_oscuro_primario
+        background-image: linear-gradient($color_primario,$color_primario)
+        background-size: 0% 100%
+        background-repeat: no-repeat
+        transition: .4s
+        overflow: hidden
+        
+        //Contenedor de la imagen de la carta para que al hacer un reescalado no se salga la imagen del contenedor
+        &__imagen
+            width: 100%
+            max-height: 200px
+            max-width: 200px
+            min-height: 125px
+            min-width: 125px
+            border-right: 4px solid $color_primario
+            z-index: 1
+            overflow: hidden
+
+            //Tamaños y propiedades de la visualización de la imagen
+            &__img
+                height: 100%
+                width: 100%
+                max-height: 200px
+                max-width: 200px
+                min-height: 125px
+                min-width: 125px
+                object-fit: cover 
+                transition: 0.6s
+
+        //Nombre de la carta
+        &__nombre
+            width: 100%
+            text-align: center
+            align-self: center
+            color: $color_claro_primario            
+            font-family: $fuente_secundaria
+            font-size: $XS
+            z-index: 1
+            padding: $XXS
+        
+        //Icono de + de la ultima carta en el listado de todo
+        &__icono
+            width: 100%
+            align-self: center
+            color: $color_claro_primario
+            text-align: center
+            font-size: 92px
+            font-family: $fuente_secundaria
+
+        //Información de la ultima carta en el listado de todo
+        &__vermas
+            width: 100%
+            text-align: center
+            align-self: center
+            color: $color_claro_primario            
+            font-family: $fuente_secundaria
+            font-size: $S
+            padding: $XXS
+        
+        //Desplazara el alto del fondo para que le de un efecto de bajada
+        &:hover
+            background-size: 100% 100%
+            
+            //Escalara la imagen un 20% para que de una sensación de Zoom
+            .principal__carta__item__imagen__img
+                transform: scale(1.2)
+        
+        //Propiedades unicas para la clase con el modificador vermas
+        &--vermas
+            opacity: 80%
+            display: flex
+            flex-direction: row
+            justify-content: space-evenly
+            justify-items: center
+            background-size: 0% 0%
+
+            &:hover
+                background-size: 0% 0%
+                opacity: 100%
+
+    //Recorte en el fondo de la carta para hacer un efecto de faltarle una esquina. 
+    &__item::before
+        content: ""
+        position: absolute
+        bottom: 0
+        right: 0
+        border-top: none
+        border-right: none
+        border-bottom: 20px solid $color_claro_primario
+        border-left: 20px solid rgba(0,0,0,0)
+
+    //Ajustes de los tamaños a las distintas resoluciones
+    @media (max-width: 1300px)  
+        gap: $S 
+
+    @media (max-width: 1050px)  
+        grid-template-columns: repeat(2,1fr)
+
+    @media (max-width: 850px)  
+        width: 95%
+        
+    @media (max-width: 700px)
+        gap: $XS
+    
+    @media (max-width: 600px)
+        width: 95%
+        grid-template-columns: 1fr

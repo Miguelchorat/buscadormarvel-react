@@ -1,0 +1,31 @@
+@import '../main.sass'
+//Pantalla de inicio de la página web
+.principal
+    @extend %principal
+    
+    //Apartado de la identidad
+    &__identidad
+        width: 100%
+        display: grid
+        grid-template-rows: 3fr 1fr
+        align-items: end
+        justify-items: center
+
+        //Logo de la web
+        &__logo
+            height: 125px
+            width: 125px
+            background-image: url(../../img/logo.svg)
+            background-size: cover
+
+        //Nombre de la página web
+        &__titulo
+            width: 100%
+            color: $color_primario
+            font-family: $fuente_primaria
+            font-size: $L            
+            text-align: center
+
+            &__activo 
+                color: $color_primario_hover
+                opacity: 60%

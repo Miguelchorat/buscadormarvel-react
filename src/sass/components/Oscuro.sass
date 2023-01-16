@@ -1,0 +1,126 @@
+@import '../main.sass'
+
+//Clase que se le adjudicara al BODY del HTML para el modo oscuro de la web
+.tema--oscuro
+    background-color: $color_oscuro_terciario
+
+    //Colocaremos el encabezado único del index.html en un oscuro único para el modo oscuro
+    .encabezado
+
+        &--index
+            background-color: $color_oscuro_terciario
+        
+        //Los iconos se acompañaran con el color claro primario
+        &__menu
+
+            &__icono
+                color: $color_claro_primario
+
+                &:hover
+                    color: $color_primario
+
+    //Personalización del modo oscuro del selector de la clase principal
+    .principal
+
+        //Personalización de la identidad 
+        &__identidad
+
+            //Cambiamos el icono por defecto del logo por uno único para el modo claro
+            &__logo
+                background-image: url(../../img/logo-oscuro.svg)
+
+            &__titulo
+                color: $color_claro_primario
+
+        &__titulo
+            color: $color_claro_primario
+
+        //Cambiamos los colores a unos oscuros con fuente blanca
+        &__buscador
+
+            &__input
+                border: 1px solid $color_oscuro_primario
+                background-color: $color_oscuro_primario   
+                color: $color_claro_primario             
+
+            &__boton   
+
+                &__icono
+                    color: $color_claro_primario
+                    font-size: 100%
+
+                &:hover
+                    background-color:  $color_oscuro_secundario
+
+        //Cambiamos el SVG de los articulos para que sea acorde al modo oscuro. Las distintas fuentes se volveran del color claro primario de la web
+        &__secciones
+
+            &__articulo
+                background-image: url(../../img/card-oscuro.svg)
+
+                &__titulo
+                    color: $color_claro_primario
+
+                &__info
+                    color: $color_claro_primario
+
+                //Los cortes en la esquina de los recuadros tendremos que ajustarlo al nuevo color de fondo del modo oscuro
+                &__boton
+                    &::after
+                        content: ""
+                        position: absolute
+                        top: 0
+                        left: 0
+                        border-bottom: 15px solid rgba(0,0,0,0) 
+                        border-left: 15px solid $color_oscuro_secundario
+
+                    &::before
+                        content: ""
+                        position: absolute
+                        bottom: 0
+                        right: 0
+                        border-bottom: 15px solid $color_oscuro_secundario
+                        border-left: 15px solid rgba(0,0,0,0)
+        
+        //Cambiaremos los colores de la fuente del página a uno acorde para el modo oscuro
+        &__paginado
+
+            &__nav
+                font-family: $fuente_secundaria
+                font-size: $XS
+                color: $color_claro_primario
+
+                &:hover
+                    color: $color_primario_hover
+
+            &__nav--disable
+                pointer-events: none
+                opacity: $opacidad
+            
+            &__nav--active
+                pointer-events: none
+                color: $color_primario
+
+        //Cambiamos las fuentes a un color acorde al modo oscuro
+        &__perfil
+
+            &__titulo                
+                color: $color_claro_primario
+
+            &__texto            
+                color: $color_claro_primario
+
+        //Modificamos de carta y personaje la esquina recortada del fondo para que se ajuste al nuevo color de fondo.                      
+        &__carta
+
+            &__item
+
+                &:before
+                    border-bottom: 20px solid $color_oscuro_terciario
+        
+        &__personaje
+
+            &__item
+
+                &:before
+                    border-bottom: 20px solid $color_oscuro_terciario

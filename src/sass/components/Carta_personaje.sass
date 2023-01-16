@@ -1,0 +1,127 @@
+@import '../main.sass'
+
+//Diseño para la carta única de personaje
+.principal__personaje
+    width: 85%
+    max-width: 1420px
+    display: grid
+    align-self: center
+    justify-items: center
+    grid-template-columns: repeat(6,1fr)
+    gap: $XL
+    margin-bottom: $XL
+    
+    //Carta de personaje
+    &__item
+        height: 100%
+        width: 100%                
+        max-height: 325px
+        max-width: 200px 
+        min-height: 310px    
+        background-color: $color_oscuro_primario
+        background-image: linear-gradient($color_primario,$color_primario)
+        background-size: 100% 0
+        background-repeat: no-repeat            
+        position: relative
+        transition: .4s
+        overflow: hidden
+
+        //Contenedor de la imagen de la carta de personaje para que no se desborde al reescalar en el hover
+        &__imagen
+            width: 100%
+            max-height: 200px
+            min-height: 125px
+            min-width: 125px
+            border-bottom: 4px solid $color_primario
+            display: flex
+            z-index: 1    
+            overflow: hidden
+            
+            //Imagen de la carta de personaje
+            &__img        
+                width: 100%
+                max-height: 200px
+                min-height: 125px
+                min-width: 125px 
+                object-fit: cover 
+                transition: 0.6s
+
+        //Nombre del personaje
+        &__nombre
+            width: 100%
+            min-height: 110px
+            max-height: 125px
+            text-align: center
+            color: $color_claro_primario            
+            font-family: $fuente_secundaria
+            z-index: 1
+            padding: $XXS
+        
+        //Icono de la última carta de personaje en el apartado de todo en la busqueda
+        &__icono
+            width: 100%
+            align-self: center
+            color: $color_claro_primario
+            text-align: center
+            font-size: 92px
+            font-family: $fuente_secundaria
+
+        //Texto de la última carta de personaje en el apartado de todo en la busqueda
+        &__vermas
+            width: 100%
+            color: $color_claro_primario
+            text-align: center
+            font-size: $S
+            font-family: $fuente_secundaria
+            padding: $XXS
+
+        //Cambio del tamaño del background para que rellene el fondo y el rescalado de la imagen de la carta
+        &:hover
+            background-size: 100% 100%
+        
+            .principal__personaje__item__imagen__img
+                transform: scale(1.2)
+
+        //Diseño de la carta vermas que es única en el apartado de la busqueda de todos.
+        &--vermas
+            opacity: 80%
+            display: flex
+            flex-direction: column
+            justify-content: space-evenly
+            justify-items: flex-start
+            background-size: 0% 0%
+
+            &:hover
+                background-size: 0% 0%
+                opacity: 100%
+            
+    //Recorte de la esquina del fondo de la carta
+    &__item:before
+        content: ""
+        position: absolute
+        bottom: 0
+        right: 0
+        border-top: none
+        border-right: none
+        border-bottom: 20px solid $color_claro_primario
+        border-left: 20px solid rgba(0,0,0,0)
+    
+    //Cambio en los tamaños para la configuración de las nuevas resoluciones
+    @media (max-width: 1300px)  
+        grid-template-columns: repeat(5,1fr)    
+
+    @media (max-width: 1050px)  
+        grid-template-columns: repeat(4,1fr)
+
+    @media (max-width: 850px)  
+        width: 95%
+        gap: $M
+        grid-template-columns: repeat(3,1fr)
+
+    @media (max-width: 550px)
+        gap: $XS
+        grid-template-columns: repeat(2,1fr)
+    
+    @media (max-width: 350px)
+        width: 80%
+        grid-template-columns: 1fr

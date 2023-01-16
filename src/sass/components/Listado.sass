@@ -1,0 +1,117 @@
+@import '../main.sass'
+.principal
+    @extend %principal
+    
+    //Modificación unica para el principal de la página de listados
+    &--listado
+        padding: $XXL 0
+    
+    &__filtro
+        width: 85%
+        max-width: 1420px
+        align-self: center
+        text-align: left
+        display: flex
+        justify-content: end
+
+        &__opciones
+            height: $M
+            width: 260px
+            font-family: $fuente_secundaria
+            font-size: $XS
+            padding-left: $XXS
+
+    //Este diseño estará oculto por defecto. Se mostrará en el caso de que no haya encontrado ninguna información en la busqueda
+    &__vacio
+        height: 100%
+        width: 100%        
+        display: none
+        flex-direction: column
+        justify-content: start
+        align-items: flex-start
+        padding: $XXL
+
+        &__activo
+            display: flex
+            
+        &__parrafo
+            font-size: $S
+            font-family: $fuente_secundaria
+            padding-left: $XL
+            padding-bottom: $XXS
+
+            &__resultado 
+                font-family: $fuente_primaria
+        
+        &__lista
+            font-size: $S
+            font-family: $fuente_secundaria
+            padding-left: $XXL
+
+            &__item
+                margin-left: $XS
+        
+        //Cambio de tamaños correspondientes a la nueva resolución de la página
+        @media (max-width: 800px)  
+            padding: $XXL $M
+
+            .principal__vacio__parrafo
+                font-size: $XS
+            
+            .principal__vacio__lista
+                font-size: $XS
+        
+        @media (max-width: 550px)  
+            padding: $XXL 0
+
+            .principal__vacio__parrafo
+                padding-left: $M
+            
+            .principal__vacio__lista
+                padding-left: $M
+
+    //Título correspondiente a cada listado
+    &__titulo
+        width: 85%
+        max-width: 1420px
+        align-self: center
+        text-align: left
+        font-family: $fuente_primaria
+        font-size: $M
+        letter-spacing: 1px
+
+        //Cambio de tamaños correspondientes a la nueva resolución de la página
+        @media (max-width: 850px)  
+            width: 95%
+
+        @media (max-width: 650px)
+            font-size: $S
+    
+    //Páginado del listado para la navegación entre los distintos resultados
+    &__paginado
+        width: 85%
+        max-width: 1420px
+        display: flex
+        flex-direction: row
+        align-self: center
+        justify-content: center
+        gap: $XL
+        margin-top: $XS
+
+        &__nav
+            font-family: $fuente_secundaria
+            font-size: $XS
+            color: $color_oscuro_primario
+
+            &:hover
+                color: $color_primario_hover
+
+        //En caso de que el botón tenga que desactivarse para no darle uso
+        &__nav--disable
+            pointer-events: none
+            opacity: $opacidad
+        
+        //En caso de que el botón este activo
+        &__nav--active
+            pointer-events: none
+            color: $color_primario

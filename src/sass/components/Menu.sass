@@ -1,0 +1,456 @@
+@import '../main.sass'
+
+//Diseño del menu desplegable 
+.desplegable
+    position: fixed
+    top: 0
+    right: 0
+    height: 100%
+    width: 280px
+    transform: translateX(280px)
+    z-index: 99
+    background-color: $color_oscuro_secundario
+    display: none
+    flex-direction: column
+    gap: $S
+    box-shadow: rgba(0, 0, 0, 0.4) 0px 3px 8px
+    transition: all 0.3s ease-in-out
+    
+    &__activo
+        display: flex
+        transition: all 0.3s ease-in-out
+        transform: translateX(0)
+        
+
+    //Encabezado del menu desplegable que tendrá el icono de volver atras y el de cerrar
+    &__header
+        height: 100%
+        width: 100%
+        max-height: $XL
+        align-self: end     
+        display: flex
+        align-items: center
+        justify-content: space-between
+        padding: 0 $XS
+        
+        &__icono
+            color: $color_claro_secundario
+            cursor: pointer
+
+            &__inactivo
+                visibility: hidden
+
+            &:hover
+                color: $color_primario
+
+    //Apartado de inicio del menu desplegable
+    &__inicio
+        display: none
+        flex-direction: column        
+
+        &__activo
+            display: flex
+
+        //Sección de la sesión de usuario
+        &__sesion
+            display: flex
+            flex-direction: row
+            border-top: 1px solid $color_claro_secundario
+            border-bottom: 1px solid $color_claro_secundario
+            padding: $XS 0 $XS $XS
+            position: relative
+
+            //Avatar del usuario
+            &__img
+                min-height: 82px
+                min-width: 82px
+                border-radius: 50%
+                background: url(../../img/hulk.jpg) no-repeat
+                background-size: cover
+                box-shadow: rgba(0, 0, 0, 0.4) 0px 3px 8px
+                position: relative
+                display: flex
+                align-items: center
+                justify-content: center
+
+                //Icono que estará oculto mientras la sesión este cerrada para la edición del avatar
+                &__icono
+                    position: absolute             
+                    color: $color_claro_primario
+                    z-index: 2
+                    display: none !important //Necesario para sobreescribir el display que trae de los iconos de google. El de alli tiene mas especificidad por lo que nunca aplicaria este display.
+                    visibility: hidden
+
+                //Fondo que estará oculto mientras la sesión este cerrada
+                &__fondo
+                    position: absolute
+                    height: 100%
+                    width: 100%
+                    background-color: rgba(0, 0, 0, 0.4)
+                    border-radius: 50%
+                    display: none
+                    visibility: hidden
+
+                //En caso de que la sesión este abierta el hover al colocar el cursor encima le quitará la invisibilidad al icono y fondo
+                &:hover
+                    .desplegable__inicio__sesion__img
+                        &__fondo
+                            visibility: visible
+                        &__icono
+                            visibility: visible
+            
+            //Apartado visible cuando la sesión del usuario este cerrada
+            &__cerrada
+                width: 100%
+                display: flex
+                flex-direction: column
+                justify-content: center
+                padding-left: $XS
+                gap: 8px 
+
+                &__desactivo
+                    display: none
+
+                //Identificación del usuario y los enlaces de registro y iniciar sesión
+                &__identificacion
+                    width: 100%
+                    display: flex
+                    color: $color_claro_primario
+                    font-family: $fuente_secundaria
+                    font-size: $XS
+                    align-content: center
+
+                    &__enlace
+                        color: $color_primario
+                        font-family: $fuente_secundaria
+                        font-size: $XS
+
+                        &:hover
+                            color: $color_primario_hover
+            
+                &__info
+                    color: $color_claro_primario
+                    font-family: $fuente_secundaria
+                    font-size: $XXS
+            
+            //Apartado visible cuando la sesión del usuario este abierta
+            &__abierta
+                width: 100%
+                display: none
+                flex-direction: column
+                justify-content: center
+                padding: 0 $XS
+                gap: $XS
+
+                &__activo
+                    display: flex
+
+                //Información de bienvenida al usuario
+                &__informacion
+                    color: $color_claro_primario
+                    font-family: $fuente_secundaria
+                    font-size: $XS
+
+                    //Nombre del usuario y propiedades
+                    &__usuario
+                        font-family: $fuente_primaria
+                        color: $color_claro_primario
+
+                //Enlace de navegación hace el perfil
+                &__perfil
+                    width: 100%
+                    color: $color_primario
+                    font-family: $fuente_primaria
+                    display: flex
+                    align-items: center
+                    justify-content: start
+                    font-size: $XS
+
+                    &:hover
+                        color: $color_primario_hover
+
+        //Lista de diferentes enlaces como contacto, marvel.com...
+        &__lista
+            display: flex
+            flex-direction: column            
+            list-style: none
+            padding-top: $M
+
+            &__item         
+                display: flex  
+                flex-direction: column                        
+
+                &__enlace
+                    height: 100%
+                    width: 100%
+                    display: grid
+                    grid-template-columns: 1fr 5fr 1fr 1fr
+                    align-items: center
+                    gap: $XXS                    
+                    padding: $XXS  
+                    color: $color_claro_primario
+                    text-decoration: none
+                    font-family: $fuente_primaria
+                    font-size: $XS
+                    align-self: center
+
+                    //Modificación única para el modo nocturno
+                    &--corto
+                        grid-template-columns: 1.4fr 1fr 5fr 1fr
+                    &--cerrar
+                        display: none                                        
+
+                    &__icono
+                        align-self: center
+                        justify-self: end
+                        color: $color_claro_primario  
+
+                    &__desplegable
+                        justify-self: end
+                        transition: 0.5s  
+
+                        &__activo
+                            transform: rotate(90deg)       
+
+                    &:hover
+                        background-color: $color_oscuro_terciario
+                
+                //Desplegable del modo nocturno para que no se muestr
+                &__oculto
+                    height: 100%
+                    width: 100%
+                    display: none     
+                    padding: $XXS 0 
+                    background-color: $color_oscuro_primario
+                    color: $color_claro_primario
+                    text-decoration: none
+                    font-family: $fuente_primaria
+                    font-size: $XS
+                    justify-content: center
+                    border: 1px solid $color_oscuro_terciario
+
+                    &__activo
+                        display: flex
+
+                    &:hover
+                        background-color: $color_oscuro_terciario
+
+    //Apartado para iniciar sesión el usuario
+    &__iniciar
+        display: none
+        flex-direction: column
+        padding:  $XS 
+        gap: $XS
+
+        &__activo
+            display: flex
+
+        &__titulo
+            @extend %titulo_desplegable
+
+        &__input
+            padding: 0.5rem
+            font-family: $fuente_secundaria
+            font-size: $XS
+        
+        &__boton
+            @extend %boton_desplegable
+
+            &:hover
+                background-color: $color_primario_hover
+
+        &__remember
+            display: flex
+            align-items: center
+            
+            &__checkbox
+                height: $XS
+                width: $XS
+            
+                &:checked
+                    accent-color: $color_primario
+
+            &__label
+                font-family: $fuente_secundaria
+                font-size: $XS
+                color: $color_claro_primario
+                padding-left: $XXS
+
+        &__enlace
+            width: 60%
+            color: $color_primario
+            align-self: end
+            font-family: $fuente_primaria
+            font-size: $XS
+            text-align: end
+
+            &:hover
+                color: $color_claro_primario
+        
+        &__registro
+            border-top: 1px solid $color_claro_primario
+            color: $color_claro_primario
+            font-size: $XS
+            font-family: $fuente_secundaria
+            text-align: center
+            margin-top: $XS
+            padding-top: $S
+
+        //Información oculta que solo se mostrara en caso de equivocación del usuario
+        &__informacion
+            display: none
+            color: $color_claro_secundario
+            font-size: $XS
+            font-family: $fuente_secundaria
+            text-align: center
+            margin-bottom: $XS
+
+            &__activo
+                display: flex
+
+    //Apartado de registro del usuario
+    &__registrar
+        display: none
+        flex-direction: column
+        padding:  $XS 
+        gap: $XS  
+
+        &__activo
+            display: flex
+
+        &__titulo
+            @extend %titulo_desplegable
+
+        &__input
+            padding: 0.5rem
+            font-family: $fuente_secundaria
+            font-size: $XS
+        
+        &__boton
+            @extend %boton_desplegable
+        
+        &__iniciar
+            border-top: 1px solid $color_claro_primario
+            color: $color_claro_primario
+            font-size: $XS
+            font-family: $fuente_secundaria
+            text-align: center
+            margin-top: $XS
+            padding-top: $S
+
+        //Información oculta que solo se mostrara en caso de equivocación del usuario
+        &__informacion
+            display: none
+            color: $color_claro_secundario
+            font-size: $XS
+            font-family: $fuente_secundaria
+            text-align: left
+
+            &__activo
+                display: flex
+    
+    //Apartado de contacto
+    &__contacto
+        display: none
+        flex-direction: column
+        padding:  $XS 
+        gap: $XS
+
+        &__activo
+            display: flex
+
+        &__titulo
+            @extend %titulo_desplegable
+
+        &__input
+            padding: 0.5rem
+            font-family: $fuente_secundaria
+            font-size: $XS
+        
+        &__boton
+            @extend %boton_desplegable
+
+        &__enlace
+            width: 60%
+            color: $color_primario
+            align-self: end
+            font-family: $fuente_primaria
+            font-size: $XS
+            text-align: end
+
+        &__textarea
+            height: 128px
+            font-family: $fuente_secundaria
+            font-size: $XS
+            padding: 0.5rem
+            resize: none
+        
+        //Información oculta que solo se mostrara en caso de equivocación del usuario
+        &__informacion
+            display: none
+            color: $color_claro_secundario
+            font-size: $XS
+            font-family: $fuente_secundaria
+            text-align: center
+            margin-top: $XS
+
+            &__activo
+                display: flex
+
+    //Apartado de recuperación de la cuenta
+    &__recuperar
+        display: none
+        flex-direction: column
+        padding:  $XS 
+        gap: $XS
+
+        &__activo
+            display: flex
+
+        &__titulo
+            @extend %titulo_desplegable
+
+        &__input
+            padding: 0.5rem
+            font-family: $fuente_secundaria
+            font-size: $XS
+        
+        &__boton
+            @extend %boton_desplegable
+
+        &__cuenta
+            border-top: 1px solid $color_claro_primario
+            color: $color_claro_primario
+            font-size: $XS
+            font-family: $fuente_secundaria
+            text-align: center
+            margin-top: $XS
+            padding-top: $S
+        
+        //Información oculta que solo se mostrara en caso de equivocación del usuario
+        &__informacion
+            display: none
+            color: $color_claro_secundario
+            font-size: $XS
+            font-family: $fuente_secundaria
+            text-align: center
+            margin-top: $XS
+
+            &__activo
+                display: flex
+
+//Fondo auxiliar para cuando se despliegue el menu desplegable
+.fondo__desplegable
+    position: fixed
+    top: 0
+    left: 0
+    height: 100vh
+    width: 100vw
+    background-color: $color_oscuro_secundario
+    opacity: $opacidad
+    display: none
+    z-index: 98
+
+    &__activo
+        display: flex
+

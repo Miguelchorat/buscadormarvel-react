@@ -1,0 +1,107 @@
+@import '../main.sass'
+
+//Ventana emergente
+.popup
+    height: 75%
+    width: 30%
+    max-height: 600px
+    max-width: 450px
+    min-height: 580px
+    min-width: 450px
+    position: fixed
+    top: 0
+    bottom: 0
+    left: 0
+    right: 0
+    margin: auto
+    background: $color_oscuro_secundario
+    display: none
+    flex-direction: column
+    z-index: 99
+    overflow: auto
+    box-shadow: rgba(0, 0, 0, 0.4) 0px 4px 12px
+
+    &__activo
+        display: flex
+
+    //Icono para cerrar la ventana emergente
+    &__icono
+        color: $color_claro_primario
+        align-self: end
+        margin: $XXS
+        cursor: pointer
+
+        &:hover
+            color: $color_primario
+    
+    //Apartado de actualizar en la ventana emergente que sale en el perfil de usuario
+    &__actualizar
+        height: 100%
+        width: 100%
+        display: flex
+        flex-direction: column
+        justify-content: space-around
+        padding: $XXS
+
+        //Título de la ventana emergente
+        &__titulo
+            @extend %titulo_desplegable
+
+        //Datos de caso de equivocación del usuario, no se mostrará por defecto
+        &__informacion
+            display: none
+            color: $color_claro_secundario
+            font-size: $XS
+            font-family: $fuente_secundaria
+            text-align: center
+            margin-bottom: $XS
+
+            &__activo
+                display: flex
+
+        //Input de los formularios para la modificación
+        &__input
+            padding: 0.5rem
+            font-family: $fuente_secundaria
+            font-size: $XS
+
+        //Botón de terminar modificación
+        &__boton
+            @extend %boton_desplegable
+
+        //Enlace e información de borrado de cuenta
+        &__borrar
+            padding-top: $S
+            display: flex
+            gap: 4px
+            justify-content: end
+
+            &__info            
+                color: $color_claro_secundario
+                font-size: $XS
+                font-family: $fuente_secundaria
+
+            &__enlace
+                color: $color_primario
+                font-size: $XS
+                font-family: $fuente_secundaria
+                border-bottom: 1px solid rgba(0, 0, 0, 0)
+
+                &:hover
+                    border-bottom: 1px solid $color_primario
+    
+    //Cambio en los tamaños para la configuración de las nuevas resoluciones
+    @media (max-width: 500px)
+        min-width: 350px
+
+    @media (max-width: 300px)
+        min-width: 260px
+        
+        &__actualizar__borrar
+            gap: 4px
+
+            &__info            
+                font-size: 12px
+
+            &__enlace
+                font-size: 12px

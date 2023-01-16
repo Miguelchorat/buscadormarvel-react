@@ -1,0 +1,33 @@
+@import '../main.sass'
+.principal
+    &__paginado
+        width: 85%
+        max-width: 1420px
+        display: flex
+        flex-direction: row
+        align-self: center
+        justify-content: center
+        gap: $XL
+        margin-top: $XS
+
+        &__nav
+            font-family: $fuente_secundaria
+            font-size: $XS
+            color: $color_oscuro_primario                        
+            cursor: pointer
+
+            &:hover
+                color: $color_primario_hover
+
+        //En caso de que el botón tenga que desactivarse para no darle uso
+        &__nav--disable
+            pointer-events: none
+            opacity: $opacidad
+        
+        //En caso de que el botón este activo
+        &__nav--active
+            pointer-events: none
+            color: $color_primario
+        
+        &__nav--enable
+            color: $color_primario

@@ -1,0 +1,43 @@
+@import '../main.sass'
+
+//Configuración del perfil de usuario de la página web
+.principal    
+    
+    //Modificación única de principal para perfil
+    &--perfil
+        margin-bottom: $XL
+        gap: 0
+
+    //Datos del perfil de usuario y botón para la modificación del perfil
+    &__perfil
+        display: flex
+        flex-direction: column
+        gap: $XXS     
+        margin: 0 20%
+    
+        &__titulo
+            font-family: $fuente_primaria
+            color: $color_oscuro_primario
+            font-size: $S
+
+        &__texto
+            font-family: $fuente_secundaria
+            color: $color_oscuro_primario
+            font-size: $XS
+
+        &__boton
+            width: 100%
+            margin-top: $XXS
+            max-width: 450px
+            min-width: 260px
+            align-self: center
+            @extend %boton_desplegable
+    
+    //Cambio de tamaños correspondientes a la nueva resolución de la página
+    @media (max-width: 800px)  
+
+        &__perfil
+            margin: 0 10%
+            &__imagen
+                top:24%
+            

@@ -1,0 +1,25 @@
+//Diferentes configuraciónes predeterminadas como botones o títulos que heredaran los selectores que le corresponda
+%boton_desplegable
+    padding: 0.5rem
+    background-color: $color_primario
+    color: $color_claro_primario
+    font-family: $fuente_primaria
+    font-size: $XS
+    text-align: center
+    border: none
+    cursor: pointer
+    
+    &:hover
+        background-color: $color_primario_hover
+
+%titulo_desplegable
+    text-align: center
+    color: $color_claro_primario
+    font-family: $fuente_primaria
+    font-size: $M
+
+%principal
+    display: flex
+    flex-direction: column
+    gap: $S
+    flex-grow: 1

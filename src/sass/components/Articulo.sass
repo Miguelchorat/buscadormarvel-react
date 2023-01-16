@@ -1,0 +1,77 @@
+@import '../main.sass'
+
+.principal
+
+    &__secciones
+
+        //Diseño que tendrá cada artículo de la secciones
+        &__articulo
+            max-height: 302px
+            max-width: 302px
+            display: grid
+            grid-template-rows: 2fr 1fr 2fr 1fr 15px
+            background-image: url(../../img/card.svg)
+            background-repeat: no-repeat
+            background-position: center
+            background-size: contain
+            align-items: center
+            justify-items: center
+            
+            //Imagen que representa al artículo
+            &__icono
+                height: 92px
+                width: 92px
+                padding-top: $XS
+                background-position: center
+                background-size: auto
+                align-self: end
+            
+            //Título del articulo
+            &__titulo
+                letter-spacing: 1px
+                font-size: $S
+                font-family: $fuente_primaria
+                align-self: center
+
+            //Información del articulo
+            &__info
+                height: 100%
+                width: 80%
+                font-size: $XS
+                font-family: $fuente_secundaria
+                text-align: center
+                align-self: start
+                hyphens: auto
+
+            //Botón de navegación del articulo a la sección correspondiente
+            &__boton
+                height: 75%
+                width: 35%
+                color: $color_claro_primario
+                font-size: $XS
+                font-family: $fuente_primaria
+                background-color: $color_primario
+                display: flex
+                justify-content: center
+                align-items: center
+                position: relative
+
+                &:hover
+                    background-color: $color_primario_hover
+                
+                //Recortes de las esquinas inferior derecha y superior izquierda
+                &::after
+                    content: ""
+                    position: absolute
+                    top: 0
+                    left: 0
+                    border-bottom: 15px solid rgba(0,0,0,0) 
+                    border-left: 15px solid $color_claro_secundario
+
+                &::before
+                    content: ""
+                    position: absolute
+                    bottom: 0
+                    right: 0
+                    border-bottom: 15px solid $color_claro_secundario
+                    border-left: 15px solid rgba(0,0,0,0)

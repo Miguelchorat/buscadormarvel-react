@@ -1,0 +1,226 @@
+@import '../main.sass'
+
+.principal
+    
+    &__lista
+        width: 85%
+        max-width: 1420px
+        display: flex
+        flex-direction: column
+        align-self: center
+        list-style: none
+        align-items: center
+        margin-bottom: $XL
+        
+        &__item
+            width: 100%
+            font-family: $fuente_secundaria
+            font-size: $S        
+            text-align: center
+            padding: $XXS
+
+            &:nth-child(even)
+                background-color: $color_claro_secundario
+
+            &:nth-child(odd)
+                background-color: $color_claro_primario
+
+            &__enlace
+                color: $color_oscuro_primario
+
+    &__info
+        width: 85%
+        max-width: 1420px
+        display: flex
+        align-self: center
+        display: flex
+        justify-content: center
+        font-family: $fuente_secundaria
+        font-size: $S
+        color: $color_primario
+        
+    //Encabezado de la clase principal
+    &__encabezado
+        height: 50%
+        width: 100%
+        min-height: 435px
+        max-height: 450px
+        background-color: $color_oscuro_secundario
+        position: relative
+        display: flex
+        flex-direction: row
+        align-items: center
+        margin-bottom: $XL
+        color: $color_oscuro_primario
+
+        //Modificación unica para el encabezado perteneciente a perfil
+        &--perfil
+            height: 20%
+            min-height: 250px
+
+        &__titulo
+            width: 100%
+            font-family: $fuente_primaria
+            font-size: $XXL
+            color: $color_claro_primario
+            text-align: center
+            z-index: 1
+
+        //Imagen de fondo que tendrá el encabezado
+        &__fondo
+            height: 100%
+            width: 100%
+            position: absolute
+            top: 0
+            left: 0                     
+            z-index: 0    
+            background: url(../../img/informacion.jpg) no-repeat
+            background-size: cover
+            
+
+        //Un fondo que metera un desenfoque de tipo blur a la imagen de fondo
+        &__desenfoque
+            height: 100%
+            width: 100%
+            position: absolute
+            top: 0
+            left: 0
+            background-color: rgba(0, 0, 0, 0.8)
+            backdrop-filter: blur(6px)    
+            z-index: 0     
+        
+        //Imagen que se mostrará en el encabezado tal como la imagen de un comic o personaje
+        &__imagen
+            height: 50%
+            width: 50%
+            max-height: 217px
+            max-width: 217px
+            object-fit: cover
+            z-index: 1
+            margin-left: 100px
+            box-shadow: rgba(0, 0, 0, 0.1) 0px 10px 50px
+
+        //Información del elemento seleccionado como el título y descripción de un comic o personaje
+        &__informacion
+            height: 250px
+            z-index: 1
+            display: flex
+            flex-direction: column
+            gap: $S
+            padding: $L
+            
+            &__titulo
+                font-family: $fuente_primaria
+                font-size: $M
+                color: $color_claro_primario
+
+            &__descripcion
+                height: 100%
+                width: 40%              
+                font-family: $fuente_secundaria
+                font-size: $XS
+                color: $color_claro_primario
+
+        //Enlace del objeto elegido hacía la página de marvel.com
+        &__enlace
+            position: absolute
+            bottom: $XS
+            right: $XS
+            color: $color_claro_primario
+            z-index: 1
+
+            &:hover
+                color: $color_primario
+
+        //Icono y texto de volver atras a un apartado anterior
+        &__volver
+            position: absolute
+            top: $XS
+            left: $XS
+            z-index: 1
+            display: flex
+            flex-direction: row            
+            align-items: center
+            gap: $XXS
+            cursor: pointer
+
+            &__atras    
+                color: $color_claro_primario                
+
+            &__info
+                color: $color_claro_primario
+                font-family: $fuente_primaria
+                letter-spacing: 1px
+                font-size: $XS
+
+            &:hover
+                .principal__encabezado__volver
+                    &__atras    
+                        color: $color_primario
+                    &__info
+                        color: $color_primario
+
+        //Configuración de los tamaños a la nueva correspondiente resolución
+        @media (max-width: 1300px)  
+            .principal__encabezado__informacion__descripcion
+                width: 70%
+            
+        @media (max-width: 1000px)  
+            .principal__encabezado__informacion__descripcion
+                width: 100%
+
+        @media (max-width: 800px)  
+            display: flex
+            flex-direction: column
+            min-height: 450px
+            padding: $XXL
+
+            &--perfil
+                min-height: 250px
+
+            &__imagen
+                max-height: 150px
+                max-width: 150px
+                margin-left: 0px
+
+            &__informacion
+                gap: $S
+                padding: $XXS
+
+        @media (max-width: 500px)  
+            min-height: 600px
+            padding: $XXL
+
+            &--perfil
+                min-height: 250px
+
+            &__titulo
+                font-size: $XL
+
+            &__informacion
+                gap: $S
+                padding: $XXS
+
+                &__titulo
+                    text-align: center
+
+            &__volver__info
+                display: none
+
+        @media (max-width: 350px)  
+            min-height: 700px
+            padding: $XL
+
+            &--perfil
+                min-height: 250px
+            
+            &__titulo
+                font-size: $M
+
+            &__informacion
+                gap: $S
+                padding: $XXS
+
+            &__volver__info
+                display: none
+                
