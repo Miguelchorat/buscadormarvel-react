@@ -3,16 +3,32 @@ import '../sass/components/NotFound.sass';
 import notfound from '../img/404.png';
 import nubes from '../img/nubes.png';
 
+/**
+ * Página 404 donde llegaras en caso de buscar una ruta no existente
+ * 
+ * @component
+ * @example
+ * 
+ * return (
+ * 
+ *   <NotFound />
+ * )
+ */
 const NotFound = () => {
 
     const [hover , setHover ] = useState(false);
     const [activo , setActivo ] = useState(false);
 
+    /**
+     * Comprueba si el raton esta sobre el elemento al que le quiere realizar el hover
+     */
     const handlerHover = () =>{
         setHover(!hover)
     }
 
-    
+    /**
+     * Comprueba si el raton esta sobre el elemento al que le quiere realizar el hover
+     */
     const activar = () =>{
         setActivo(!activo)
     }

@@ -2,6 +2,21 @@ import React, {useState, useEffect} from 'react';
 import '../sass/components/Articulo.sass';
 import { BrowserRouter as Router, Routes, Route, Link, NavLink} from "react-router-dom";
 
+/**
+ * Articulo que muestra información de las distintas busquedas que se puede realizar
+ *
+ * @component
+ * @example
+ * const props.icono = '../..image/ejemplo.png'
+ * const props.titulo = 'Título de ejemplo'
+ * const props.descripcion = 'Descripción de ejemplo'
+ * const props.enlace = '/Busqueda_personajes'
+ * 
+ * return (
+ * 
+ *   <Articulo icono={icono} titulo={titulo} descripcion={descripcion} enlace={enlace} />
+ * )
+ */
 const Articulo = (props) => {
     
     return (

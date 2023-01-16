@@ -2,6 +2,19 @@ import React, {useState, useEffect} from 'react';
 import '../sass/components/Perfil.sass';
 import Popup from './Popup';
 
+/**
+ * Perfil del usuario y su información 
+ * 
+ * @component
+ * @example
+ * const props.actualPagina = 2
+ * const props.ultimaPagina = 4
+ * 
+ * return (
+ * 
+ *   <Paginado actualPagina={actualPagina} ultimaPagina={ultimaPagina}/>
+ * )
+ */
 function Perfil(){
 
     const [popup , setPopup ] = useState(false);
@@ -9,6 +22,9 @@ function Perfil(){
     useEffect(() => {        
     }, [popup])
 
+    /**
+     * Configura que si el popup se puede mostrar o no
+     */
     const togglePopup = () => {
         setPopup( !popup )
     }

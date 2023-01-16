@@ -4,15 +4,39 @@ import { useLocation } from 'react-router-dom'
 import '../sass/components/Buscador.sass';
 import SearchIcon from '@mui/icons-material/Search';
 
-
+/**
+ * Buscador donde podras buscar en el listado con la entrada que escriba el usuario
+ *
+ * @component
+ * 
+ * return (
+ * 
+ *   <Buscador />
+ * )
+ */
 const Buscador = () => {
+
+    /**
+     * Path donde esta ubicado el usuario
+     */
     const location = useLocation();
+
+    /**
+     * Constante que guarda la busqueda del usuario.
+     */
     const [buscador, setBuscador] = useState('')
 
+    /**
+    * Escribe en el estado del buscador lo que escribe el usuario en el input
+    * @param   {string} e  Caracter que llega del input
+    */
     const datosBuscador = (e) => {
         setBuscador(e.target.value)
     }
 
+    /**
+    * Reinicia el estado del input del buscador a vacio
+    */
     const reiniciarInput = () => {
         setBuscador('')
     }

@@ -8,6 +8,19 @@ import Menu_registrar from './Menu_registrar';
 import Menu_contacto from './Menu_contacto';
 import Menu_recuperar from './Menu_recuperar';
 
+/**
+ * Apartado del menu que contiene el apartado de iniciar sesión
+ * 
+ * @component
+ * @example
+ * const props.menu = 'menu'
+ * const props.setMenu = 'setMenu()'
+ * 
+ * return (
+ * 
+ *   <Menu menu={menu} setMenu={setMenu}/>
+ * )
+ */
 function Menu({ menu, setMenu }){
     
     const [apartado , setApartado ] = useState('inicio');
@@ -17,10 +30,17 @@ function Menu({ menu, setMenu }){
         setApartado('inicio')
     }, [menu,sesion])
 
+    /**
+     * Le llega por parametros el nuevo apartado al cual navegara el menu
+     * @param {String} nuevo - Nuevo apartado
+     */
     function cambiarApartado (nuevo) {
         setApartado(nuevo)
     }
 
+    /**
+     * Cambia el estado del booleano para saber si mostrar o no el menu
+     */
     const toggleMenu = () => {
         setMenu( !menu )
         setApartado('inicio')

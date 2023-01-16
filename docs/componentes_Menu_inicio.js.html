@@ -1,0 +1,195 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <title>JSDoc: Source: componentes/Menu_inicio.js</title>
+
+    <script src="scripts/prettify/prettify.js"> </script>
+    <script src="scripts/prettify/lang-css.js"> </script>
+    <!--[if lt IE 9]>
+      <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+    <link type="text/css" rel="stylesheet" href="styles/prettify-tomorrow.css">
+    <link type="text/css" rel="stylesheet" href="styles/jsdoc-default.css">
+</head>
+
+<body>
+
+<div id="main">
+
+    <h1 class="page-title">Source: componentes/Menu_inicio.js</h1>
+
+    
+
+
+
+    
+    <section>
+        <article>
+            <pre class="prettyprint source linenums"><code>import React, {useState, useEffect} from 'react';
+import '../sass/components/Menu.sass';
+import { BrowserRouter as Router, Routes, Route, Link, NavLink} from "react-router-dom";
+import LanguageIcon from '@mui/icons-material/Language';
+import MailIcon from '@mui/icons-material/Mail';
+import DarkModeIcon from '@mui/icons-material/DarkMode';
+import ArrowForwardIosIcon from '@mui/icons-material/ArrowForwardIos';
+import LogoutIcon from '@mui/icons-material/Logout';
+
+/**
+ * Apartado del menu que contiene el apartado inicial del menu donde mostrara la sesión del usuario y diferentes opciones de navegación
+ * 
+ * @component
+ * @example
+ * const props.apartado = 'inicio'
+ * const props.setApartado = 'setApartado()'
+ * const props.sesion = 'sesion()'
+ * const props.setSesion = 'setSesion()'
+ * const props.toggleMenu = 'toggleMenu()'
+ * 
+ * return (
+ * 
+ *   &lt;Menu_contacto apartado={apartado} setApartado={setApartado} sesion={sesion} setSesion={setSesion} toggleMenu={toggleMenu}/>
+ * )
+ */
+function Menu_inicio({ apartado, setApartado, sesion, setSesion, toggleMenu }){
+    
+    const [modoNocturno , setModoNocturno ] = useState(localStorage.getItem('modoNocturno') ?? false);
+    const [tema , setTema] = useState(localStorage.getItem('tema') ?? 'DIA');
+
+    useEffect(() => {        
+        setModoNocturno(false)
+        if(tema=='NOCHE'){
+            cambiarModoNoche()
+        } else {
+            cambiarModoDia()
+        }
+    }, [tema,sesion])
+
+    /**
+     * Cambia a otro apartado del menu
+     * @param {String} nuevo 
+     */
+    function cambiarApartado (nuevo) {
+        setApartado(nuevo)
+        setModoNocturno(false)
+    }
+
+    /**
+     * Cambia el booleano del estado de si activar o no el modo nocturno
+     */
+    function cambiarModoNocturno () {
+        setModoNocturno(!modoNocturno)
+        localStorage.setItem('modoNocturno',modoNocturno)
+    }  
+
+    /**
+     * Remueve una clase al BODY para que sepa que tiene que mostrar los estilos del modo Día
+     */
+    function cambiarModoDia(){
+        document.body.classList.remove("tema--oscuro")
+        setTema('DIA')
+        localStorage.setItem('tema','DIA')
+    }
+
+    /**
+     * Implementa una clase al BODY para que sepa que tiene que mostrar los estilos del modo Día
+     */
+    function cambiarModoNoche(){
+        document.body.classList.add("tema--oscuro")        
+        setTema('NOCHE')
+        localStorage.setItem('tema','NOCHE')
+    }
+
+    /**
+     * Cerrar sesión en el localstorage y de la cuenta de usuario
+     */
+    function cerrarSesion(){
+        localStorage.removeItem('sesion');
+        setSesion(false);
+    }
+
+    return (
+        &lt;div className={`desplegable__inicio ${ apartado=='inicio' ? 'desplegable__inicio__activo' : ""}`}>
+            &lt;div className="desplegable__inicio__sesion">
+                &lt;section className="desplegable__inicio__sesion__img">
+                    &lt;a className="desplegable__inicio__sesion__img__icono material-symbols-outlined" href="#">edit&lt;/a>
+                    &lt;div className="desplegable__inicio__sesion__img__fondo">&lt;/div>
+                &lt;/section>
+                &lt;section className={sesion ? "desplegable__inicio__sesion__cerrada  desplegable__inicio__sesion__cerrada__desactivo" : "desplegable__inicio__sesion__cerrada"}>
+                    &lt;p className="desplegable__inicio__sesion__cerrada__identificacion">
+                        &lt;a href="#" className="desplegable__inicio__sesion__cerrada__identificacion__enlace" onClick={ () => cambiarApartado('iniciar') }>Entra&lt;/a>
+                        &amp;nbsp;
+                        o
+                        &amp;nbsp;
+                        &lt;a href="#" className="desplegable__inicio__sesion__cerrada__identificacion__enlace" onClick={ () => cambiarApartado('registrar') }>registrate&lt;/a>
+                    &lt;/p>
+                    &lt;p className="desplegable__inicio__sesion__cerrada__info">para participar en la web&lt;/p>
+                &lt;/section>
+                &lt;section className={sesion ? "desplegable__inicio__sesion__abierta desplegable__inicio__sesion__abierta__activo" : "desplegable__inicio__sesion__abierta"}>                    
+                    &lt;p className="desplegable__inicio__sesion__abierta__informacion">Hola,&amp;nbsp;&lt;span className="desplegable__inicio__sesion__abierta__informacion__usuario">
+                        PLACEHOLDER
+                    &lt;/span>&lt;/p>
+                    &lt;Link className="desplegable__inicio__sesion__abierta__perfil" to="/perfil" onClick={toggleMenu}>                        
+                        Gestionar tu cuenta
+                    &lt;/Link>
+                &lt;/section>
+            &lt;/div>
+
+            &lt;ul className="desplegable__inicio__lista">
+                &lt;li className="desplegable__inicio__lista__item">                    
+                    &lt;a href="https://www.marvel.com" target="_blank" className="desplegable__inicio__lista__item__enlace">
+                        &lt;LanguageIcon className="desplegable__inicio__lista__item__enlace__icono">&lt;/LanguageIcon>
+                        MARVEL.COM
+                    &lt;/a>
+                &lt;/li>
+                &lt;li className="desplegable__inicio__lista__item">                    
+                    &lt;a href="#" className="desplegable__inicio__lista__item__enlace" onClick={ () => cambiarApartado('contacto') }>
+                        &lt;MailIcon className="desplegable__inicio__lista__item__enlace__icono">&lt;/MailIcon>
+                        CONTACTO
+                    &lt;/a>
+                &lt;/li>
+                &lt;li className="desplegable__inicio__lista__item">                    
+                    &lt;a href="#" className="desplegable__inicio__lista__item__enlace desplegable__inicio__lista__item__enlace--corto" onClick={ cambiarModoNocturno }>
+                        &lt;DarkModeIcon className="desplegable__inicio__lista__item__enlace__icono">&lt;/DarkModeIcon>
+                        ASPECTO:&lt;span className="desplegable__inicio__lista__item__enlace__icono__modo">{tema}&lt;/span>
+                        &lt;ArrowForwardIosIcon className={`desplegable__inicio__lista__item__enlace__desplegable ${ modoNocturno ? 'desplegable__inicio__lista__item__enlace__desplegable__activo' : ""}`}>&lt;/ArrowForwardIosIcon>
+                    &lt;/a>                    
+                    &lt;a onClick={cambiarModoDia} className={`desplegable__inicio__lista__item__oculto ${ modoNocturno ? 'desplegable__inicio__lista__item__oculto__activo' : ""}`}
+                    href="#">MODO DÍA&lt;/a>
+                    &lt;a onClick={cambiarModoNoche} className={`desplegable__inicio__lista__item__oculto ${ modoNocturno ? 'desplegable__inicio__lista__item__oculto__activo' : ""}`}
+                    href="#">MODO NOCHE&lt;/a>
+                &lt;/li>
+                &lt;li className="desplegable__inicio__lista__item">                    
+                    &lt;Link to="/" className={sesion ? "desplegable__inicio__lista__item__enlace" : "desplegable__inicio__lista__item__enlace desplegable__inicio__lista__item__enlace--cerrar"} onClick={cerrarSesion}>
+                        &lt;LogoutIcon className="desplegable__inicio__lista__item__enlace__icono">&lt;/LogoutIcon>
+                        CERRAR SESIÓN
+                    &lt;/Link>
+                &lt;/li>
+            &lt;/ul>
+        &lt;/div>
+    )
+}
+
+export default Menu_inicio;</code></pre>
+        </article>
+    </section>
+
+
+
+
+</div>
+
+<nav>
+    <h2><a href="index.html">Home</a></h2><h3>Classes</h3><ul><li><a href="App.html">App</a></li><li><a href="Articulo.html">Articulo</a></li><li><a href="Buscador.html">Buscador</a></li><li><a href="Carta_comic.html">Carta_comic</a></li><li><a href="Carta_personaje.html">Carta_personaje</a></li><li><a href="Encabezado.html">Encabezado</a></li><li><a href="Encabezado_informacion.html">Encabezado_informacion</a></li><li><a href="Filtro.html">Filtro</a></li><li><a href="Footer.html">Footer</a></li><li><a href="Informacion.html">Informacion</a></li><li><a href="Inicio.html">Inicio</a></li><li><a href="Listado_comic.html">Listado_comic</a></li><li><a href="Listado_personaje.html">Listado_personaje</a></li><li><a href="Listado_serie.html">Listado_serie</a></li><li><a href="Menu.html">Menu</a></li><li><a href="Menu_contacto.html">Menu_contacto</a></li><li><a href="Menu_iniciar.html">Menu_iniciar</a></li><li><a href="Menu_inicio.html">Menu_inicio</a></li><li><a href="Menu_recuperar.html">Menu_recuperar</a></li><li><a href="Menu_registrar.html">Menu_registrar</a></li><li><a href="NotFound.html">NotFound</a></li><li><a href="Paginado.html">Paginado</a></li><li><a href="Perfil.html">Perfil</a></li><li><a href="Popup.html">Popup</a></li><li><a href="Secciones.html">Secciones</a></li></ul><h3>Global</h3><ul><li><a href="global.html#hash">hash</a></li><li><a href="global.html#private_key">private_key</a></li><li><a href="global.html#public_key">public_key</a></li><li><a href="global.html#root">root</a></li><li><a href="global.html#ts">ts</a></li></ul>
+</nav>
+
+<br class="clear">
+
+<footer>
+    Documentation generated by <a href="https://github.com/jsdoc/jsdoc">JSDoc 4.0.0</a> on Mon Jan 16 2023 21:16:20 GMT+0100 (hora estándar de Europa central)
+</footer>
+
+<script> prettyPrint(); </script>
+<script src="scripts/linenumber.js"> </script>
+</body>
+</html>

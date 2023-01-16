@@ -1,6 +1,20 @@
 import React, {useState, useEffect} from 'react';
 import '../sass/components/Menu.sass';
 
+/**
+ * Apartado del menu que contiene el apartado de iniciar sesión
+ * 
+ * @component
+ * @example
+ * const props.apartado = 'inicio'
+ * const props.setApartado = 'setApartado()'
+ * const props.setSesion = 'setSesion()'
+ * 
+ * return (
+ * 
+ *   <Menu_contacto apartado={apartado} setApartado={setApartado} setSesion={setSesion}/>
+ * )
+ */
 function Menu_iniciar({ apartado, setApartado, setSesion}){
 
     const [correo , setCorreo ] = useState('');
@@ -9,6 +23,9 @@ function Menu_iniciar({ apartado, setApartado, setSesion}){
     const [resultado , setResultado ] = useState(true);
     const [informacion , setInformacion ] = useState('');
 
+    /**
+     * Comprueba todos los campos del formulario de iniciar sesión y garantiza que todas las opciones sean válidas.
+     */
     function validacion(){
         let emailValidation = /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/
         let passwordValidation = /^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d]{8,32}$/
@@ -29,20 +46,34 @@ function Menu_iniciar({ apartado, setApartado, setSesion}){
            setResultado(false)
            setInformacion('El correo no es válido.')
         } 
-   }
-
+    }
+   /**
+     * Guarda la información que va escribiendo el usuario en el input en su respectivo estado
+     * @param {*} e - Llega los caracteres que se registrara en el estado de correo 
+     */
     const inputCorreo = (e) => {
         setCorreo(e.target.value)
     }
 
+    /**
+     * Guarda la información que va escribiendo el usuario en el input en su respectivo estado
+     * @param {*} e - Llega los caracteres que se registrara en el estado de contraseña 
+     */
     const inputPassword = (e) => {
         setPassword(e.target.value)
     }
 
+    /**
+     * Cambia el estado de la constante booleana de verdadero a falso o viceversa
+     */
     const inputCheckbox = () => {        
         setCheckbox(!checkbox)
     }
 
+    /**
+     * Le llega por parametros el nuevo apartado al cual navegara el menu
+     * @param {String} nuevo - Nuevo apartado
+     */
     function cambiarApartado (nuevo) {
         setApartado(nuevo)
     }

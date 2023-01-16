@@ -1,8 +1,24 @@
 import React, {useState, useEffect} from 'react';
 import '../sass/components/Menu.sass';
 
+/**
+ * Apartado del menu que contiene el apartado de registrarse
+ * 
+ * @component
+ * @example
+ * const props.setApartado = 'setApartado()'
+ * const props.setSesion = 'setSesion()'
+ * 
+ * return (
+ * 
+ *   <Menu_registrar apartado={apartado} setApartado={setApartado}/>
+ * )
+ */
 function Menu_registrar({ apartado, setApartado }){
 
+    /**
+     * Constante que guarda la edad minima para el registro
+     */
     const MIN_EDAD_PERMITIDA = 12
     const [correo , setCorreo ] = useState('');
     const [usuario , setUsuario ] = useState('');
@@ -12,6 +28,9 @@ function Menu_registrar({ apartado, setApartado }){
     const [resultado , setResultado ] = useState(true);
     const [informacion , setInformacion ] = useState('');
 
+    /**
+     * Comprueba todos los campos del formulario de contacto y garantiza que todas las opciones sean válidas.
+     */
     function validacion(){
         let emailValidation = /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/
         let usuarioValidation = /^[a-zA-Z]{3,18}$/;
@@ -45,28 +64,51 @@ function Menu_registrar({ apartado, setApartado }){
            setResultado(false)
            setInformacion('El usuario no es válido.')
         } 
-   }
+    }
 
+    /**
+     * Le llega por parametros el nuevo apartado al cual navegara el menu
+     * @param {String} nuevo - Nuevo apartado
+     */
     function cambiarApartado (nuevo) {
         setApartado(nuevo)
     }
 
+    /**
+     * Guarda la información que va escribiendo el usuario en el input en su respectivo estado
+     * @param {*} e - Llega los caracteres que se registrara en el estado de correo 
+     */
     const inputCorreo = (e) => {
         setCorreo(e.target.value)
     }
-
+    /**
+     * Guarda la información que va escribiendo el usuario en el input en su respectivo estado
+     * @param {*} e - Llega los caracteres que se registrara en el estado de usuario 
+     */
     const inputUsuario = (e) => {
         setUsuario(e.target.value)
     }
 
+    /**
+     * Guarda la información que va escribiendo el usuario en el input en su respectivo estado
+     * @param {*} e - Llega los caracteres que se registrara en el estado de la contraseña 
+     */
     const inputPassword = (e) => {
         setPassword(e.target.value)
     }
 
+    /**
+     * Guarda la información que va escribiendo el usuario en el input en su respectivo estado
+     * @param {*} e - Llega los caracteres que se registrara en el estado de la nueva contraseña 
+     */
     const inputNuevaPassword = (e) => {
         setNuevaPassword(e.target.value)
     }
 
+    /**
+     * Guarda la información que va escribiendo el usuario en el input en su respectivo estado
+     * @param {*} e - Llega los caracteres que se registrara en el estado de la fecha 
+     */
     const inputFecha = (e) => {        
         let fechaProv = e.target.value;    
         setFecha(fechaProv)

@@ -7,6 +7,22 @@ import DarkModeIcon from '@mui/icons-material/DarkMode';
 import ArrowForwardIosIcon from '@mui/icons-material/ArrowForwardIos';
 import LogoutIcon from '@mui/icons-material/Logout';
 
+/**
+ * Apartado del menu que contiene el apartado inicial del menu donde mostrara la sesión del usuario y diferentes opciones de navegación
+ * 
+ * @component
+ * @example
+ * const props.apartado = 'inicio'
+ * const props.setApartado = 'setApartado()'
+ * const props.sesion = 'sesion()'
+ * const props.setSesion = 'setSesion()'
+ * const props.toggleMenu = 'toggleMenu()'
+ * 
+ * return (
+ * 
+ *   <Menu_contacto apartado={apartado} setApartado={setApartado} sesion={sesion} setSesion={setSesion} toggleMenu={toggleMenu}/>
+ * )
+ */
 function Menu_inicio({ apartado, setApartado, sesion, setSesion, toggleMenu }){
     
     const [modoNocturno , setModoNocturno ] = useState(localStorage.getItem('modoNocturno') ?? false);
@@ -21,30 +37,44 @@ function Menu_inicio({ apartado, setApartado, sesion, setSesion, toggleMenu }){
         }
     }, [tema,sesion])
 
+    /**
+     * Cambia a otro apartado del menu
+     * @param {String} nuevo 
+     */
     function cambiarApartado (nuevo) {
         setApartado(nuevo)
         setModoNocturno(false)
     }
 
+    /**
+     * Cambia el booleano del estado de si activar o no el modo nocturno
+     */
     function cambiarModoNocturno () {
         setModoNocturno(!modoNocturno)
         localStorage.setItem('modoNocturno',modoNocturno)
     }  
 
-    //Remueve una clase al BODY para que sepa que tiene que mostrar los estilos del modo Día
+    /**
+     * Remueve una clase al BODY para que sepa que tiene que mostrar los estilos del modo Día
+     */
     function cambiarModoDia(){
         document.body.classList.remove("tema--oscuro")
         setTema('DIA')
         localStorage.setItem('tema','DIA')
     }
 
-    //Implementa una clase al BODY para que sepa que tiene que mostrar los estilos del modo Día
+    /**
+     * Implementa una clase al BODY para que sepa que tiene que mostrar los estilos del modo Día
+     */
     function cambiarModoNoche(){
         document.body.classList.add("tema--oscuro")        
         setTema('NOCHE')
         localStorage.setItem('tema','NOCHE')
     }
 
+    /**
+     * Cerrar sesión en el localstorage y de la cuenta de usuario
+     */
     function cerrarSesion(){
         localStorage.removeItem('sesion');
         setSesion(false);

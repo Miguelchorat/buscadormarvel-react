@@ -2,6 +2,22 @@ import React, {useState, useEffect} from 'react';
 import '../sass/components/Carta_comic.sass';
 import { Link } from 'react-router-dom';
 
+/**
+ * Componente que muestra la información en el listado de los comics y series
+ *
+ * @component
+ * @example
+ * const props.id = 123
+ * const props.formato = 'comics'
+ * const props.imagen = 'https://marvel.com/spiderman/'
+ * const props.extension = '.jpg/'
+ * const props.nombre = 'Spiderman'
+ * 
+ * return (
+ * 
+ *   <Carta_comic id={id} formato={formato} nombre={nombre} imagen={imagen} formato={formato} />
+ * )
+ */
 const Carta_comic = (props) => {
 
     return (

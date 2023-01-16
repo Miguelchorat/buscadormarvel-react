@@ -1,0 +1,196 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <title>JSDoc: Source: componentes/Popup.js</title>
+
+    <script src="scripts/prettify/prettify.js"> </script>
+    <script src="scripts/prettify/lang-css.js"> </script>
+    <!--[if lt IE 9]>
+      <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+    <link type="text/css" rel="stylesheet" href="styles/prettify-tomorrow.css">
+    <link type="text/css" rel="stylesheet" href="styles/jsdoc-default.css">
+</head>
+
+<body>
+
+<div id="main">
+
+    <h1 class="page-title">Source: componentes/Popup.js</h1>
+
+    
+
+
+
+    
+    <section>
+        <article>
+            <pre class="prettyprint source linenums"><code>import React, {useState, useEffect} from 'react';
+import '../sass/components/Popup.sass';
+import CloseIcon from '@mui/icons-material/Close';
+
+/**
+ * Popup que se mostrará con la información a modificar del usuario
+ * 
+ * @component
+ * @example
+ * const props.popup = 'popup'
+ * const props.setPopup = 'setPopup'
+ * 
+ * return (
+ * 
+ *   &lt;Popup popup={popup} setOpup={setOpup}/>
+ * )
+ */
+function Popup({popup, setPopup}){
+
+    /**
+     * Edad permitida para poder modificar la fecha de nacimiento
+     */
+    const MIN_EDAD_PERMITIDA = 12
+    const [correo , setCorreo ] = useState("placeholder@correo.com");
+    const [usuario , setUsuario ] = useState('PLACEHOLDER');
+    const [password , setPassword ] = useState('');
+    const [nuevaPassword , setNuevaPassword ] = useState('');
+    const [fecha , setFecha ] = useState('1970-01-01');
+    const [resultado , setResultado ] = useState(true);
+    const [informacion , setInformacion ] = useState('');
+
+    useEffect(() => {        
+    }, [resultado])
+
+    /**
+     * Comprueba todos los campos del formulario de contacto y garantiza que todas las opciones sean válidas.
+     */
+    function validacion(){
+        let emailValidation = /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/
+        let usuarioValidation = /^[a-zA-Z]{3,18}$/;
+        let passwordValidation = /^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d]{8,32}$/
+
+        if(usuarioValidation.test(usuario)){
+           if(passwordValidation.test(password)){
+               if(password === nuevaPassword){
+                    if(emailValidation.test(correo)){
+                        if(new Date(fecha).getFullYear() &lt; new Date(Date.now()).getFullYear()-MIN_EDAD_PERMITIDA){
+                            alert("Validación correcta");  
+                            togglePopup()
+                            setResultado(true)                            
+                        } else {
+                            setResultado(false)
+                            setInformacion('La edad no puede ser menor a 12 años.')
+                        }                        
+                    } else {
+                        setResultado(false)
+                        setInformacion('El correo no es válido.')
+                    }
+                   
+                } else {
+                   setResultado(false)
+                   setInformacion('Las contraseñas no coinciden.')            
+                }
+           } else {
+               setResultado(false)
+               setInformacion('La contraseña tiene que tener 8 caracteres, una letra y un número.')        
+           }            
+        }else{
+           setResultado(false)
+           setInformacion('El usuario no es válido.')
+        } 
+    }
+
+    /**
+     * Guarda la información que va escribiendo el usuario en el input en su respectivo estado
+     * @param {*} e - Llega los caracteres que se registrara en el estado de correo 
+     */
+    const inputCorreo = (e) => {
+        setCorreo(e.target.value)
+    }
+
+    /**
+     * Guarda la información que va escribiendo el usuario en el input en su respectivo estado
+     * @param {*} e - Llega los caracteres que se registrara en el estado de usuario 
+     */
+    const inputUsuario = (e) => {
+        setUsuario(e.target.value)
+    }
+
+    /**
+     * Guarda la información que va escribiendo el usuario en el input en su respectivo estado
+     * @param {*} e - Llega los caracteres que se registrara en el estado de password 
+     */
+    const inputPassword = (e) => {
+        setPassword(e.target.value)
+    }
+
+    /**
+     * Guarda la información que va escribiendo el usuario en el input en su respectivo estado
+     * @param {*} e - Llega los caracteres que se registrara en el estado de nueva password 
+     */
+    const inputNuevaPassword = (e) => {
+        setNuevaPassword(e.target.value)
+    }
+
+    /**
+     * Guarda la información que va escribiendo el usuario en el input en su respectivo estado
+     * @param {*} e - Llega los caracteres que se registrara en el estado de la fecha 
+     */
+    const inputFecha = (e) => {        
+        let fechaProv = e.target.value;    
+        setFecha(fechaProv)
+    }
+
+    /**
+     * Reinicia todo los campos correspondientes y cambia el valor del booleano de si mostrar o no la ventana emergente
+     */
+    const togglePopup = () => {
+        setPassword("")
+        setNuevaPassword("")
+        setResultado(true)
+        setPopup( !popup )
+    }
+
+    return(
+        &lt;div className={popup ? "popup popup__activo" : "popup"}>     
+            &lt;CloseIcon className="popup__icono" onClick={togglePopup}/>
+            &lt;form className="popup__actualizar">
+                &lt;h2 className="popup__actualizar__titulo">MODIFICAR&lt;/h2>
+                &lt;input type="text" className="popup__actualizar__input" placeholder="Nombre de usuario" name="nombreUsuario" value={usuario} onChange={inputUsuario}/>
+                &lt;input type="password" className="popup__actualizar__input" placeholder="Introduce tu nueva contraseña" name="clave" value={password} onChange={inputPassword}/>
+                &lt;input type="password" className="popup__actualizar__input" placeholder="Introduce tu nueva contraseña de nuevo" name="claveRepetida" value={nuevaPassword} onChange={inputNuevaPassword}/>
+                &lt;input type="email" className="popup__actualizar__input" placeholder="Introduce tu correo" name="correo" value={correo} onChange={inputCorreo}/>
+                &lt;input type="date" className="popup__actualizar__input" name="fecha" value={fecha} onChange={inputFecha}/>
+                &lt;input type="button" className="popup__actualizar__boton" value="GUARDAR" onClick={validacion}>&lt;/input>
+                &lt;p className={!resultado ? "popup__actualizar__informacion popup__actualizar__informacion__activo" : "popup__actualizar__informacion"}>{informacion}&lt;/p>                
+                &lt;div className="popup__actualizar__borrar">
+                    &lt;p className="popup__actualizar__borrar__info">¿Quieres eliminar la cuenta?&lt;/p>
+                    &lt;a className="popup__actualizar__borrar__enlace" href="#">Borrar cuenta&lt;/a>
+                &lt;/div>            
+            &lt;/form>
+        &lt;/div>
+    )
+}
+
+export default Popup;</code></pre>
+        </article>
+    </section>
+
+
+
+
+</div>
+
+<nav>
+    <h2><a href="index.html">Home</a></h2><h3>Classes</h3><ul><li><a href="App.html">App</a></li><li><a href="Articulo.html">Articulo</a></li><li><a href="Buscador.html">Buscador</a></li><li><a href="Carta_comic.html">Carta_comic</a></li><li><a href="Carta_personaje.html">Carta_personaje</a></li><li><a href="Encabezado.html">Encabezado</a></li><li><a href="Encabezado_informacion.html">Encabezado_informacion</a></li><li><a href="Filtro.html">Filtro</a></li><li><a href="Footer.html">Footer</a></li><li><a href="Informacion.html">Informacion</a></li><li><a href="Inicio.html">Inicio</a></li><li><a href="Listado_comic.html">Listado_comic</a></li><li><a href="Listado_personaje.html">Listado_personaje</a></li><li><a href="Listado_serie.html">Listado_serie</a></li><li><a href="Menu.html">Menu</a></li><li><a href="Menu_contacto.html">Menu_contacto</a></li><li><a href="Menu_iniciar.html">Menu_iniciar</a></li><li><a href="Menu_inicio.html">Menu_inicio</a></li><li><a href="Menu_recuperar.html">Menu_recuperar</a></li><li><a href="Menu_registrar.html">Menu_registrar</a></li><li><a href="NotFound.html">NotFound</a></li><li><a href="Paginado.html">Paginado</a></li><li><a href="Perfil.html">Perfil</a></li><li><a href="Popup.html">Popup</a></li><li><a href="Secciones.html">Secciones</a></li></ul><h3>Global</h3><ul><li><a href="global.html#hash">hash</a></li><li><a href="global.html#private_key">private_key</a></li><li><a href="global.html#public_key">public_key</a></li><li><a href="global.html#root">root</a></li><li><a href="global.html#ts">ts</a></li></ul>
+</nav>
+
+<br class="clear">
+
+<footer>
+    Documentation generated by <a href="https://github.com/jsdoc/jsdoc">JSDoc 4.0.0</a> on Mon Jan 16 2023 21:16:20 GMT+0100 (hora estándar de Europa central)
+</footer>
+
+<script> prettyPrint(); </script>
+<script src="scripts/linenumber.js"> </script>
+</body>
+</html>

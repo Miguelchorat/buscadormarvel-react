@@ -5,6 +5,16 @@ import icono_comics from '../img/icono_comics.svg';
 import icono_series from '../img/icono_series.svg';
 import Articulo from './Articulo';
 
+/**
+ * Tiene un listado de articulos
+ * 
+ * @component
+ * 
+ * return (
+ * 
+ *   <Secciones />
+ * )
+ */
 const Secciones = () => {
     return (
         <section className="principal__secciones">

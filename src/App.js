@@ -10,6 +10,16 @@ import Informacion from './componentes/Informacion';
 import NotFound from './componentes/NotFound';
 import Perfil from './componentes/Perfil';
 
+/**
+ * Contiene la aplicación completa y sus componentes para hacerle el enrutado
+ * 
+ * @component
+ * 
+ * return (
+ * 
+ *   <App />
+ * )
+ */
 function App() {
   return (
     <Router>

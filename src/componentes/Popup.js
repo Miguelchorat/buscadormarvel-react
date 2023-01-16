@@ -2,8 +2,24 @@ import React, {useState, useEffect} from 'react';
 import '../sass/components/Popup.sass';
 import CloseIcon from '@mui/icons-material/Close';
 
+/**
+ * Popup que se mostrará con la información a modificar del usuario
+ * 
+ * @component
+ * @example
+ * const props.popup = 'popup'
+ * const props.setPopup = 'setPopup'
+ * 
+ * return (
+ * 
+ *   <Popup popup={popup} setOpup={setOpup}/>
+ * )
+ */
 function Popup({popup, setPopup}){
 
+    /**
+     * Edad permitida para poder modificar la fecha de nacimiento
+     */
     const MIN_EDAD_PERMITIDA = 12
     const [correo , setCorreo ] = useState("placeholder@correo.com");
     const [usuario , setUsuario ] = useState('PLACEHOLDER');
@@ -16,6 +32,9 @@ function Popup({popup, setPopup}){
     useEffect(() => {        
     }, [resultado])
 
+    /**
+     * Comprueba todos los campos del formulario de contacto y garantiza que todas las opciones sean válidas.
+     */
     function validacion(){
         let emailValidation = /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/
         let usuarioValidation = /^[a-zA-Z]{3,18}$/;
@@ -50,30 +69,52 @@ function Popup({popup, setPopup}){
            setResultado(false)
            setInformacion('El usuario no es válido.')
         } 
-   }
+    }
 
-
+    /**
+     * Guarda la información que va escribiendo el usuario en el input en su respectivo estado
+     * @param {*} e - Llega los caracteres que se registrara en el estado de correo 
+     */
     const inputCorreo = (e) => {
         setCorreo(e.target.value)
     }
 
+    /**
+     * Guarda la información que va escribiendo el usuario en el input en su respectivo estado
+     * @param {*} e - Llega los caracteres que se registrara en el estado de usuario 
+     */
     const inputUsuario = (e) => {
         setUsuario(e.target.value)
     }
 
+    /**
+     * Guarda la información que va escribiendo el usuario en el input en su respectivo estado
+     * @param {*} e - Llega los caracteres que se registrara en el estado de password 
+     */
     const inputPassword = (e) => {
         setPassword(e.target.value)
     }
 
+    /**
+     * Guarda la información que va escribiendo el usuario en el input en su respectivo estado
+     * @param {*} e - Llega los caracteres que se registrara en el estado de nueva password 
+     */
     const inputNuevaPassword = (e) => {
         setNuevaPassword(e.target.value)
     }
 
+    /**
+     * Guarda la información que va escribiendo el usuario en el input en su respectivo estado
+     * @param {*} e - Llega los caracteres que se registrara en el estado de la fecha 
+     */
     const inputFecha = (e) => {        
         let fechaProv = e.target.value;    
         setFecha(fechaProv)
     }
 
+    /**
+     * Reinicia todo los campos correspondientes y cambia el valor del booleano de si mostrar o no la ventana emergente
+     */
     const togglePopup = () => {
         setPassword("")
         setNuevaPassword("")

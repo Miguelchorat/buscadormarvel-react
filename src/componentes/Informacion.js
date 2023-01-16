@@ -1,23 +1,40 @@
 import React, {useState, useEffect} from 'react';
 import { useLocation } from 'react-router-dom'
-import { BrowserRouter as Router, Routes, Route, Link, NavLink} from "react-router-dom";
-import { MD5 } from "md5-js-tools";
 import '../sass/components/Informacion.sass';
 import Encabezado_informacion from './Encabezado_informacion';
 import { public_key, ts, hash } from '../Api';
 
+/**
+ * Mostrará la información del articulo elegido en el listado
+ *
+ * @component
+ * 
+ * return (
+ * 
+ *   <Informacion />
+ * )
+ */
 function Informacion(){
     const [datosApi, setDatosApi] = useState(null)
+    /**
+     * Variable usada para saber si hay un listado dentro de la información o le indica al usuario que no hay mas contenido
+     */
     let bandera = false;
 
+    /**
+     * Path donde esta ubicado el usuario
+     */
     const location = useLocation();
     let { id } = location.state;
     let { formato } = location.state;
-
+    
     useEffect(() => {        
         obtenerDatos().catch(console.error);
     }, [datosApi])
 
+    /**
+     * Accede a la URL de la API y rescata todos los datos de la API guardandola en un estado. Todo lo hace de forma asincrona.
+     */
     const obtenerDatos =  async () => {
         let api = null    
         api = await fetch('http://gateway.marvel.com/v1/public/'+formato+'/'+id+'?ts='+ts+'&apikey='+public_key+'&hash='+hash); 

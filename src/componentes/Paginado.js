@@ -1,6 +1,19 @@
 import React, {useState, useEffect} from 'react';
 import '../sass/components/Paginado.sass';
 
+/**
+ * Componente que contiene el páginado y la navegación por la lista
+ * 
+ * @component
+ * @example
+ * const props.actualPagina = 2
+ * const props.ultimaPagina = 4
+ * 
+ * return (
+ * 
+ *   <Paginado actualPagina={actualPagina} ultimaPagina={ultimaPagina}/>
+ * )
+ */
 const Paginado = (props) => {
     
     return (

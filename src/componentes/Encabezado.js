@@ -1,17 +1,30 @@
 import React, {useState, useEffect} from 'react';
 import { useLocation } from 'react-router-dom'
 import { BrowserRouter as Router, Routes, Route, Link, NavLink} from "react-router-dom";
-
 import '../sass/components/Encabezado.sass';
 import MenuIcon from '@mui/icons-material/Menu';
 import Menu from './Menu';
 import Buscador from './Buscador';
 
+/**
+ * Encabezado de la página que mostrará la navegación de la página web y el botón para acceder al menu.
+ *
+ * @component
+ * @example
+ * 
+ * return (
+ * 
+ *   <Encabezado/>
+ * )
+ */
 function Encabezado(){
 
     const [menu , setMenu ] = useState(false);
     const location = useLocation();
 
+    /**
+    * Cambia el valor del booleano que informa si el menu se tiene que mostrar o no.
+    */
     const toggleMenu = () => {
         setMenu( !menu )
     }

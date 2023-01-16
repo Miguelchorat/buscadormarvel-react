@@ -1,0 +1,154 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <title>JSDoc: Source: Listado_serie.js</title>
+
+    <script src="scripts/prettify/prettify.js"> </script>
+    <script src="scripts/prettify/lang-css.js"> </script>
+    <!--[if lt IE 9]>
+      <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+    <link type="text/css" rel="stylesheet" href="styles/prettify-tomorrow.css">
+    <link type="text/css" rel="stylesheet" href="styles/jsdoc-default.css">
+</head>
+
+<body>
+
+<div id="main">
+
+    <h1 class="page-title">Source: Listado_serie.js</h1>
+
+    
+
+
+
+    
+    <section>
+        <article>
+            <pre class="prettyprint source linenums"><code>import React, {useState, useEffect} from 'react';
+import '../sass/components/Listado.sass';
+import { MD5 } from "md5-js-tools";
+import Carta_comic from './Carta_comic';
+import Paginado from './Paginado';
+import { useLocation } from 'react-router-dom'
+import Filtro from './Filtro';
+import { public_key, ts, hash } from '../Api';
+
+/**
+ * Mostrará un listado de serie que haya buscado el usuario. En caso de no tener ningun listado que mostrar se lo indicara al usuario.
+ *
+ * @component
+ * 
+ * return (
+ * 
+ *   &lt;Listado_serie />
+ * )
+ */
+const Listado_serie = () => {
+    const [datosApi, setDatosApi] = useState(null)
+    const [actualPagina, setActualPagina] = useState(0)
+    const [indice, setIndice] = useState(0)
+    const location = useLocation()
+    let { busqueda } = location.state;
+    const [busquedaAnterior, setBusquedaAnterior] = useState(busqueda)
+    const [filtro, setFiltro] = useState('title')
+
+    const DATOS_POR_PAGINA = 12;
+    let bandera = true;
+
+    useEffect(() => {        
+        obtenerDatos().catch(console.error);
+        if(busquedaAnterior!=busqueda){
+            setBusquedaAnterior(busqueda)
+            setIndice(0)
+            setActualPagina(0)
+        }
+    }, [indice,busqueda,filtro])
+    
+    const obtenerDatos =  async () => {
+        let api = null
+        if(busqueda=='' ||busqueda==null){
+            api = await fetch('http://gateway.marvel.com/v1/public/series?limit='+DATOS_POR_PAGINA+'&amp;offset='+indice+'&amp;orderBy='+filtro+'&amp;ts='+ts+'&amp;apikey='+public_key+'&amp;hash='+hash);
+        }
+        else{
+            api = await fetch('http://gateway.marvel.com/v1/public/series?limit='+DATOS_POR_PAGINA+'&amp;offset='+indice+'&amp;orderBy='+filtro+'&amp;titleStartsWith='+busqueda+'&amp;ts='+ts+'&amp;apikey='+public_key+'&amp;hash='+hash);
+        }        
+        const datosRecibidos= await api.json();
+        setDatosApi(datosRecibidos); 
+    }
+
+    const paginaSig = () => {
+        const siguientePagina = actualPagina + 1;
+        const primerIndice = siguientePagina * DATOS_POR_PAGINA;
+        
+        if(primerIndice >= datosApi.data.total){
+            return;
+        }
+
+        setActualPagina(siguientePagina)
+        setIndice(primerIndice)
+    }
+
+    const paginaPrev = () => {
+        const anteriorPagina = actualPagina -1;
+
+        if(anteriorPagina &lt; 0){
+            return;
+        }
+
+        const primerIndice = anteriorPagina * DATOS_POR_PAGINA;
+
+        setActualPagina(anteriorPagina)
+        setIndice(primerIndice)
+    }     
+    
+    return(        
+        &lt;main className="principal principal--listado">
+            &lt;Filtro setFiltro={setFiltro} mostrarNombre={false}/>
+            
+            &lt;section className="principal__carta">            
+                {                 
+                    datosApi!=null &amp;&amp; datosApi.data.results.length>0 &amp;&amp; datosApi.data.results.map((item)=>
+                    &lt;Carta_comic key={item.id} id={item.id} formato={'series'} nombre={item.title} imagen={item.thumbnail.path} extension={item.thumbnail.extension}>{bandera=false}&lt;/Carta_comic>) 
+                }
+            &lt;/section>  
+
+            &lt;section className={datosApi!=null &amp;&amp; bandera ? "principal__vacio principal__vacio__activo" : "principal__vacio"}>
+                &lt;p className="principal__vacio__parrafo">No se han encontrado ningun resultado en la busqueda realizada.&lt;/p>
+                &lt;p className="principal__vacio__parrafo">La busqueda de &lt;span className="principal__vacio__parrafo__resultado">{busqueda}&lt;/span> no se encontró.&lt;/p>
+                &lt;ul className="principal__vacio__lista">
+                    &lt;li className="principal__vacio__lista__item">Usa palabras más generales.&lt;/li>
+                    &lt;li className="principal__vacio__lista__item">Comprueba que lo que has escrito este correctamente.&lt;/li>
+                    &lt;li className="principal__vacio__lista__item">Puede que dicha información no pertenezca al universo marvel.&lt;/li>
+                &lt;/ul>
+            &lt;/section>
+
+            &lt;Paginado actualPagina={actualPagina+1} ultimaPagina={datosApi!=null &amp;&amp; datosApi.data.results.length>0 ? datosApi.data.total/DATOS_POR_PAGINA : 0} paginaPrev={paginaPrev} paginaSig={paginaSig}/>          
+        &lt;/main>
+    )    
+};
+
+export default Listado_serie;</code></pre>
+        </article>
+    </section>
+
+
+
+
+</div>
+
+<nav>
+    <h2><a href="index.html">Home</a></h2><h3>Classes</h3><ul><li><a href="Articulo.html">Articulo</a></li><li><a href="Buscador.html">Buscador</a></li><li><a href="Carta_comic.html">Carta_comic</a></li><li><a href="Carta_personaje.html">Carta_personaje</a></li><li><a href="Encabezado.html">Encabezado</a></li><li><a href="Encabezado_informacion.html">Encabezado_informacion</a></li><li><a href="Filtro.html">Filtro</a></li><li><a href="Footer.html">Footer</a></li><li><a href="Informacion.html">Informacion</a></li><li><a href="Inicio.html">Inicio</a></li><li><a href="Listado_comic.html">Listado_comic</a></li><li><a href="Listado_personaje.html">Listado_personaje</a></li><li><a href="Listado_serie.html">Listado_serie</a></li></ul>
+</nav>
+
+<br class="clear">
+
+<footer>
+    Documentation generated by <a href="https://github.com/jsdoc/jsdoc">JSDoc 4.0.0</a> on Mon Jan 16 2023 20:25:10 GMT+0100 (hora estándar de Europa central)
+</footer>
+
+<script> prettyPrint(); </script>
+<script src="scripts/linenumber.js"> </script>
+</body>
+</html>

@@ -7,17 +7,39 @@ import { useLocation } from 'react-router-dom'
 import Filtro from './Filtro';
 import { public_key, ts, hash } from '../Api';
 
-
+/**
+ * Mostrará un listado de comics que haya buscado el usuario. En caso de no tener ningun listado que mostrar se lo indicara al usuario.
+ *
+ * @component
+ * 
+ * return (
+ * 
+ *   <Listado_comic />
+ * )
+ */
 const Listado_comic = () => {
     const [datosApi, setDatosApi] = useState(null)
     const [actualPagina, setActualPagina] = useState(0)
     const [indice, setIndice] = useState(0)
+    /**
+     * Path donde esta ubicado el usuario
+     */
     const location = useLocation()
+    /**
+     * Información de la busqueda que hizo el usuario en el buscador
+     */
     let { busqueda } = location.state;
     const [busquedaAnterior, setBusquedaAnterior] = useState(busqueda)
     const [filtro, setFiltro] = useState('title')
 
+    /**
+     * Constante que nos indica cuantos elementos mostrara en la lista
+     */
     const DATOS_POR_PAGINA = 12;
+
+    /**
+     * Variable que nos indicará si habra o no lista que mostrar al usuario.
+     */
     let bandera = true;
 
     useEffect(() => {        
@@ -29,6 +51,9 @@ const Listado_comic = () => {
         }
     }, [indice,busqueda,filtro])
     
+    /**
+     * Accede a la URL de la API y rescata todos los datos de la API guardandola en un estado. Todo lo hace de forma asincrona.
+     */
     const obtenerDatos =  async () => {
         let api = null
         if(busqueda=='' ||busqueda==null){
@@ -41,6 +66,10 @@ const Listado_comic = () => {
         setDatosApi(datosRecibidos); 
     }
 
+    /**
+     * Calcula si hay mas elemento que mostrar a continuación para la creación del paginado.
+     * @returns {} - No devuelve nada
+     */
     const paginaSig = () => {
         const siguientePagina = actualPagina + 1;
         const primerIndice = siguientePagina * DATOS_POR_PAGINA;
@@ -53,6 +82,10 @@ const Listado_comic = () => {
         setIndice(primerIndice)
     }
 
+    /**
+     * Comprueba si hay elementos previos en el listado para la navegación en el paginado.
+     * @returns {}
+     */
     const paginaPrev = () => {
         const anteriorPagina = actualPagina -1;
 

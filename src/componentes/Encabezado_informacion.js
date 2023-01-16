@@ -5,9 +5,32 @@ import ArrowBackIcon from '@mui/icons-material/ArrowBack';
 import '../sass/components/Informacion.sass';
 import { useNavigate } from "react-router-dom";
 
+/**
+ * Encabezado de la página de información de algun articulo del listado
+ *
+ * @component
+ * @example
+ * const props.descripcion = 'Esto es una descripcion'
+ * const props.formato = 'comics'
+ * const props.imagen = 'https://marvel.com/spiderman/'
+ * const props.extension = '.jpg/'
+ * const props.nombre = 'Spiderman'
+ * 
+ * return (
+ * 
+ *   <Encabezado_informacion formato={formato} nombre={nombre} imagen={imagen} descripcion={descripcion} />
+ * )
+ */
 function Encabezado_informacion(props){
+
+    /**
+     * Path donde esta ubicado el usuario para la navegación
+     */
 	const navigate = useNavigate();
 
+    /**
+    * Vuelve a la ruta anterior en la que estuvo el usuario.
+    */
     const goBack = () => {
 		navigate(-1);
 	}

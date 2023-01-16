@@ -3,6 +3,16 @@ import '../sass/components/Inicio.sass';
 import Buscador from './Buscador';
 import Secciones from './Secciones';
 
+/**
+ * Es el apartado inicial donde llegara el usuario al acceder a la web. Desde aqui navegará al listado correspondiente
+ *
+ * @component
+ * 
+ * return (
+ * 
+ *   <Inicio />
+ * )
+ */
 const Inicio = () => {
     
     const [titulo , setTitulo] = useState(false);
@@ -12,6 +22,9 @@ const Inicio = () => {
         return () => clearInterval(parpadeo);
     }, [titulo])
 
+    /**
+     * Altera el booleano entre verdadero y falso.
+     */
     function parpadearBarra(){ 
         setTitulo(!titulo)
     }
