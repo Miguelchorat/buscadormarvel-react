@@ -28,7 +28,7 @@ const Listado_serie = () => {
     /**
      * Información de la busqueda que hizo el usuario en el buscador
      */
-    let { busqueda } = location.state;
+    let { busqueda } = location.state  ?? '';
     const [busquedaAnterior, setBusquedaAnterior] = useState(busqueda)
     const [filtro, setFiltro] = useState('title')
     /**

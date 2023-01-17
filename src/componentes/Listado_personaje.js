@@ -29,7 +29,7 @@ const Listado_personaje = () => {
     /**
      * Información de la busqueda que hizo el usuario en el buscador
      */
-    let { busqueda } = location.state;
+    let { busqueda } = location.state ?? '';
     const [busquedaAnterior, setBusquedaAnterior] = useState(busqueda)
 
     /**
@@ -56,7 +56,7 @@ const Listado_personaje = () => {
      */
     const obtenerDatos =  async () => {
         let api = null
-        if(busqueda=='' ||busqueda==null){
+        if(busqueda==null ||busqueda==''){
             api = await fetch('https://gateway.marvel.com/v1/public/characters?limit='+DATOS_POR_PAGINA+'&offset='+indice+'&orderBy='+filtro+'&ts='+ts+'&apikey='+public_key+'&hash='+hash);
         }
         else{

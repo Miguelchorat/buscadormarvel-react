@@ -25,8 +25,8 @@ function Informacion(){
      * Path donde esta ubicado el usuario
      */
     const location = useLocation();
-    let { id } = location.state;
-    let { formato } = location.state;
+    let { id } = location.state ?? '';
+    let { formato } = location.state ?? '';
     
     useEffect(() => {        
         obtenerDatos().catch(console.error);

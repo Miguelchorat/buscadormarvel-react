@@ -84,7 +84,7 @@ function Menu_inicio({ apartado, setApartado, sesion, setSesion, toggleMenu }){
         <div className={`desplegable__inicio ${ apartado=='inicio' ? 'desplegable__inicio__activo' : ""}`}>
             <div className="desplegable__inicio__sesion">
                 <section className="desplegable__inicio__sesion__img">
-                    <a className="desplegable__inicio__sesion__img__icono material-symbols-outlined" href="#">edit</a>
+                    <a className="desplegable__inicio__sesion__img__icono material-symbols-outlined">edit</a>
                     <div className="desplegable__inicio__sesion__img__fondo"></div>
                 </section>
                 <section className={sesion ? "desplegable__inicio__sesion__cerrada  desplegable__inicio__sesion__cerrada__desactivo" : "desplegable__inicio__sesion__cerrada"}>
@@ -115,21 +115,21 @@ function Menu_inicio({ apartado, setApartado, sesion, setSesion, toggleMenu }){
                     </a>
                 </li>
                 <li className="desplegable__inicio__lista__item">                    
-                    <a href="#" className="desplegable__inicio__lista__item__enlace" onClick={ () => cambiarApartado('contacto') }>
+                    <a className="desplegable__inicio__lista__item__enlace" onClick={ () => cambiarApartado('contacto') }>
                         <MailIcon className="desplegable__inicio__lista__item__enlace__icono"></MailIcon>
                         CONTACTO
                     </a>
                 </li>
                 <li className="desplegable__inicio__lista__item">                    
-                    <a href="#" className="desplegable__inicio__lista__item__enlace desplegable__inicio__lista__item__enlace--corto" onClick={ cambiarModoNocturno }>
+                    <a className="desplegable__inicio__lista__item__enlace desplegable__inicio__lista__item__enlace--corto" onClick={ cambiarModoNocturno }>
                         <DarkModeIcon className="desplegable__inicio__lista__item__enlace__icono"></DarkModeIcon>
                         ASPECTO:<span className="desplegable__inicio__lista__item__enlace__icono__modo">{tema}</span>
                         <ArrowForwardIosIcon className={`desplegable__inicio__lista__item__enlace__desplegable ${ modoNocturno ? 'desplegable__inicio__lista__item__enlace__desplegable__activo' : ""}`}></ArrowForwardIosIcon>
                     </a>                    
                     <a onClick={cambiarModoDia} className={`desplegable__inicio__lista__item__oculto ${ modoNocturno ? 'desplegable__inicio__lista__item__oculto__activo' : ""}`}
-                    href="#">MODO DÍA</a>
+                    >MODO DÍA</a>
                     <a onClick={cambiarModoNoche} className={`desplegable__inicio__lista__item__oculto ${ modoNocturno ? 'desplegable__inicio__lista__item__oculto__activo' : ""}`}
-                    href="#">MODO NOCHE</a>
+                    >MODO NOCHE</a>
                 </li>
                 <li className="desplegable__inicio__lista__item">                    
                     <Link to="/" className={sesion ? "desplegable__inicio__lista__item__enlace" : "desplegable__inicio__lista__item__enlace desplegable__inicio__lista__item__enlace--cerrar"} onClick={cerrarSesion}>
