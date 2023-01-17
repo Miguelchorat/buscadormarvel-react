@@ -37,7 +37,7 @@ function Informacion(){
      */
     const obtenerDatos =  async () => {
         let api = null    
-        api = await fetch('http://gateway.marvel.com/v1/public/'+formato+'/'+id+'?ts='+ts+'&apikey='+public_key+'&hash='+hash); 
+        api = await fetch('https://gateway.marvel.com/v1/public/'+formato+'/'+id+'?ts='+ts+'&apikey='+public_key+'&hash='+hash); 
         const datosRecibidos= await api.json();
         setDatosApi(datosRecibidos); 
     }

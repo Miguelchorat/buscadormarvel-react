@@ -55,10 +55,10 @@ const Listado_serie = () => {
     const obtenerDatos =  async () => {
         let api = null
         if(busqueda=='' ||busqueda==null){
-            api = await fetch('http://gateway.marvel.com/v1/public/series?limit='+DATOS_POR_PAGINA+'&offset='+indice+'&orderBy='+filtro+'&ts='+ts+'&apikey='+public_key+'&hash='+hash);
+            api = await fetch('https://gateway.marvel.com/v1/public/series?limit='+DATOS_POR_PAGINA+'&offset='+indice+'&orderBy='+filtro+'&ts='+ts+'&apikey='+public_key+'&hash='+hash);
         }
         else{
-            api = await fetch('http://gateway.marvel.com/v1/public/series?limit='+DATOS_POR_PAGINA+'&offset='+indice+'&orderBy='+filtro+'&titleStartsWith='+busqueda+'&ts='+ts+'&apikey='+public_key+'&hash='+hash);
+            api = await fetch('https://gateway.marvel.com/v1/public/series?limit='+DATOS_POR_PAGINA+'&offset='+indice+'&orderBy='+filtro+'&titleStartsWith='+busqueda+'&ts='+ts+'&apikey='+public_key+'&hash='+hash);
         }        
         const datosRecibidos= await api.json();
         setDatosApi(datosRecibidos); 
